@@ -1,0 +1,30 @@
+import Link from 'next/link';
+import ThemeToggle from './ThemeToggle';
+import LanguageSwitcher from './LanguageSwitcher';
+
+export default function Header({ lang, dict }) {
+  return (
+    <header className="site-header">
+      <div className="header-inner">
+        <Link href={`/${lang}`} className="brand">
+          Wellington Alves Clemente
+        </Link>
+
+        <nav className="main-nav">
+          <ul>
+            <li><Link href={`/${lang}`}>{dict.nav.home}</Link></li>
+            <li><Link href={`/${lang}/posts`}>{dict.nav.posts}</Link></li>
+            <li><Link href={`/${lang}/research`}>{dict.nav.research}</Link></li>
+            <li><Link href={`/${lang}/categories`}>{dict.nav.categories}</Link></li>
+            <li><Link href={`/${lang}/search`}>{dict.nav.search}</Link></li>
+          </ul>
+        </nav>
+
+        <div className="header-actions">
+          <ThemeToggle />
+          <LanguageSwitcher lang={lang} />
+        </div>
+      </div>
+    </header>
+  );
+}
