@@ -1,0 +1,28 @@
+{
+  "nav": {
+    "home": "Início",
+    "posts": "Posts",
+    "research": "Pesquisa",
+    "categories": "Categorias",
+    "search": "Busca"
+  },
+  "hero": {
+    "role": "Desenvolvedor e Suporte de TI",
+    "location": "Foz do Iguaçu, Brasil",
+    "available": "Disponível para novas oportunidades"
+  },
+  "sections": {
+    "about": "Sobre",
+    "contact": "Contato",
+    "experience": "Experiência",
+    "skills": "Skills",
+    "certifications": "Certificações",
+    "education": "Educação",
+    "languages": "Idiomas",
+    "softSkills": "Soft Skills",
+    "links": "Links"
+  },
+  "about": {
+    "text": "Lorem ipsum dolor sit amet..."
+  }
+}

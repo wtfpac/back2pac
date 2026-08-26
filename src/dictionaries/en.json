@@ -1,0 +1,28 @@
+{
+  "nav": {
+    "home": "Home",
+    "posts": "Posts",
+    "research": "Research",
+    "categories": "Categories",
+    "search": "Search"
+  },
+  "hero": {
+    "role": "Developer and IT Support",
+    "location": "Foz do Iguaçu, Brazil",
+    "available": "Available for new opportunities"
+  },
+  "sections": {
+    "about": "About",
+    "contact": "Contact",
+    "experience": "Experience",
+    "skills": "Skills",
+    "certifications": "Certifications",
+    "education": "Education",
+    "languages": "Languages",
+    "softSkills": "Soft Skills",
+    "links": "Links"
+  },
+  "about": {
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
+  }
+}
