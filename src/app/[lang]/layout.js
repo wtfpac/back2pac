@@ -1,42 +1,50 @@
-// Layout raiz: envolve TODAS as páginas do site.
-// Como ele fica dentro de [lang], existe uma versão dele por idioma.
-
 import './../globals.css';
 import Header from '@/components/Header';
 import { getDictionary } from '@/dictionaries';
+import { getSettings } from '@/lib/content';
 
-// Metadados da aba do navegador e dos buscadores.
-// O Next monta a <head> sozinho a partir daqui.
-export const metadata = {
-  title: 'Wellington Alves Clemente',
-  description: 'Desenvolvedor e profissional de suporte de TI.',
-};
-
-// Diz ao Next quais valores [lang] pode assumir, para ele
-// gerar as duas versões prontas no build em vez de montar na hora.
 export function generateStaticParams() {
   return [{ lang: 'pt' }, { lang: 'en' }];
 }
 
-// async porque precisamos esperar (await) o params e o dicionário.
-export default async function RootLayout({ children, params }) {
-  // params traz o valor da pasta [lang]: 'pt' ou 'en'.
+export async function generateMetadata({ params }) {
   const { lang } = await params;
+  const dict = await getDictionary(lang);
+  const { siteUrl } = getSettings();
 
-  // Carrega o JSON de textos do idioma atual.
+  return {
+    // Converte caminhos relativos em URLs absolutas nas tags de compartilhamento
+    metadataBase: new URL(siteUrl),
+
+    title: {
+      default: dict.meta.title,
+      // Páginas com título próprio viram "Primeiro post · Wellington Alves Clemente"
+      template: `%s · ${dict.meta.title}`,
+    },
+    description: dict.meta.description,
+
+    openGraph: {
+      type: 'website',
+      locale: lang === 'pt' ? 'pt_BR' : 'en_US',
+      siteName: dict.meta.title,
+      title: dict.meta.title,
+      description: dict.meta.description,
+    },
+
+    twitter: { card: 'summary' },
+  };
+}
+
+export default async function RootLayout({ children, params }) {
+  const { lang } = await params;
   const dict = await getDictionary(lang);
 
   return (
-    // data-theme="dark" é o padrão do site. O ThemeToggle troca
-    // esse atributo no navegador, e o CSS reage à mudança.
+    // data-theme="dark" é o padrão; o ThemeToggle troca esse atributo
     <html lang={lang} data-theme="dark">
       <body>
-        {/* Header recebe o idioma (para montar os links) e o dicionário (para os textos) */}
         <Header lang={lang} dict={dict} />
-
-        {/* children é a página que está sendo exibida no momento */}
         <div className="container">{children}</div>
-
         <footer className="site-footer">
           <div className="header-inner">© 2026 Wellington Alves Clemente</div>
         </footer>

@@ -2,35 +2,52 @@ import { getSettings, getSlugs, getCategories } from '@/lib/content';
 
 const LANGUAGES = ['pt', 'en'];
 
-// o next transforma o que esta função devolve no arquivo /sitemap.xml
+// Agrupa por caminho, registrando em quais idiomas ele existe.
+// Um post só escrito em português não vai declarar versão em inglês.
+function addPath(paths, path, lang, options) {
+    const entry = paths.get(path) ?? { path, langs: [], ...options };
+    entry.langs.push(lang);
+    paths.set(path, entry);
+}
+
 export default function sitemap() {
-  const { siteUrl } = getSettings();
-  const routes = [];
+    const { siteUrl } = getSettings();
+    const paths = new Map();
 
-  for (const lang of LANGUAGES) {
-    routes.push(
-      { url: `${siteUrl}/${lang}`, changeFrequency: 'monthly', priority: 1 },
-      { url: `${siteUrl}/${lang}/posts`, changeFrequency: 'weekly', priority: 0.8 },
-      { url: `${siteUrl}/${lang}/categories`, changeFrequency: 'monthly', priority: 0.5 }
-    );
+    for (const lang of LANGUAGES) {
+        addPath(paths, '', lang, { changeFrequency: 'monthly', priority: 1 });
+        addPath(paths, '/posts', lang, { changeFrequency: 'weekly', priority: 0.8 });
+        addPath(paths, '/categories', lang, { changeFrequency: 'monthly', priority: 0.5 });
 
-    for (const slug of getSlugs(lang)) {
-      routes.push({
-        url: `${siteUrl}/${lang}/posts/${slug}`,
-        changeFrequency: 'yearly',
-        priority: 0.7,
-      });
+        for (const slug of getSlugs(lang)) {
+            addPath(paths, `/posts/${slug}`, lang, {
+                changeFrequency: 'yearly',
+                priority: 0.7,
+            });
+        }
+
+        for (const { slug } of getCategories(lang)) {
+            addPath(paths, `/categories/${slug}`, lang, {
+                changeFrequency: 'monthly',
+                priority: 0.4,
+            });
+        }
     }
 
-    for (const { slug } of getCategories(lang)) {
-      routes.push({
-        url: `${siteUrl}/${lang}/categories/${slug}`,
-        changeFrequency: 'monthly',
-        priority: 0.4,
-      });
-    }
-  }
+    return [...paths.values()].flatMap(({ path, langs, ...options }) => {
+        const languages = Object.fromEntries(
+            langs.map((lang) => [lang, `${siteUrl}/${lang}${path}`])
+        );
 
-  // a busca fica de fora de propósito: é uma página sem conteúdo próprio
-  return routes;
+        // Versão mostrada a quem não bate com nenhum dos idiomas acima,
+        // igual ao que o proxy.js faz com o visitante
+        if (languages.pt) languages['x-default'] = languages.pt;
+
+        // Cada idioma vira uma entrada, todas apontando umas para as outras
+        return langs.map((lang) => ({
+            url: `${siteUrl}/${lang}${path}`,
+            ...options,
+            alternates: { languages },
+        }));
+    });
 }
