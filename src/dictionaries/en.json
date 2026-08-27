@@ -178,5 +178,14 @@
         "url": "https://www.linkedin.com/in/w7ll/"
       }
     ]
+  },
+  "content": {
+  "postsTitle": "Posts",
+  "postsIntro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "researchTitle": "Research",
+  "researchIntro": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "empty": "Nothing published yet.",
+  "readingTime": "min read",
+  "words": "words"
   }
 }

@@ -118,5 +118,15 @@
       { "label": "GitHub", "url": "https://github.com/SEU-USUARIO" },
       { "label": "LinkedIn", "url": "https://www.linkedin.com/in/w7ll/" }
     ]
+  },
+  "content": {
+  "postsTitle": "Posts",
+  "postsIntro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  "researchTitle": "Pesquisa",
+  "researchIntro": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  "empty": "Nenhum conteúdo publicado ainda.",
+  "readingTime": "min de leitura",
+  "words": "palavras"
   }
 }
+

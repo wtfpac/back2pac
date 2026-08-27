@@ -249,6 +249,100 @@ a:hover {
 }
 
 @media (max-width: 600px) {
-  .hero-name { font-size: 1.6rem; }
-  .skill-category { min-width: auto; }
+  .hero-name {
+    font-size: 1.6rem;
+  }
+
+  .skill-category {
+    min-width: auto;
+  }
+}
+
+.page-title {
+  font-size: 1.6rem;
+  margin: 0 0 0.5rem;
+}
+
+.page-intro {
+  color: var(--fg-muted);
+  margin: 0 0 2rem;
+}
+
+.entry-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.entry-list-item {
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.entry-list-item:last-child {
+  border-bottom: none;
+}
+
+.entry-list-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.entry-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0.4rem 0;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--fg-muted);
+}
+
+.entry-summary {
+  margin: 0.3rem 0 0;
+  color: var(--fg-muted);
+}
+
+.empty-state {
+  color: var(--fg-muted);
+  font-style: italic;
+}
+
+.prose {
+  margin-top: 2rem;
+}
+
+.prose h2 {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+}
+
+.prose pre {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1rem;
+  overflow-x: auto;
+  font-size: 0.88rem;
+}
+
+.prose code {
+  font-family: var(--font-mono);
+  background: var(--bg-soft);
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--accent);
+  margin: 1rem 0;
+  padding: 0.2rem 1rem;
+  color: var(--fg-muted);
 }
