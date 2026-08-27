@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import ThemeToggle from './ThemeToggle';
 import LanguageSwitcher from './LanguageSwitcher';
-import { getSettings } from '@/lib/settings';
+import { getSettings } from '@/lib/content';
 
 export default function Header({ lang, dict }) {
   const { showSearch } = getSettings();

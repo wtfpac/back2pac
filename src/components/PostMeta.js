@@ -1,5 +1,9 @@
+import Link from 'next/link';
+import { slugify } from '@/lib/slug';
+
 const LOCALES = { pt: 'pt-BR', en: 'en-US' };
 
+// Usado na listagem e na página do post; showWordCount separa os dois casos
 export default function PostMeta({ post, lang, dict, showWordCount = false }) {
   const date = post.date
     ? new Date(post.date).toLocaleDateString(LOCALES[lang] ?? LOCALES.pt, {
@@ -14,10 +18,19 @@ export default function PostMeta({ post, lang, dict, showWordCount = false }) {
   return (
     <div className="entry-meta">
       {date && <time dateTime={post.date}>{date}</time>}
+
       <span>{post.readingTime} {dict.content.readingTime}</span>
+
       {showWordCount && <span>{post.wordCount} {dict.content.words}</span>}
+
       {post.categories.map((category) => (
-        <span key={category} className="tag">{category}</span>
+        <Link
+          key={category}
+          href={`/${lang}/categories/${slugify(category)}`}
+          className="tag"
+        >
+          {category}
+        </Link>
       ))}
     </div>
   );
