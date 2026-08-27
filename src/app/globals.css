@@ -346,3 +346,20 @@ a:hover {
   padding: 0.2rem 1rem;
   color: var(--fg-muted);
 }
+
+.search-input {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  background: var(--bg-soft);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.search-input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}

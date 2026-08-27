@@ -6,6 +6,7 @@ export default function PostMeta({ post, lang, dict, showWordCount = false }) {
         day: '2-digit',
         month: '2-digit',
         year: 'numeric',
+        // Sem UTC a data pode voltar um dia dependendo do fuso do visitante
         timeZone: 'UTC',
       })
     : null;

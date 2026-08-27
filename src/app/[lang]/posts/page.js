@@ -1,6 +1,6 @@
 import { getDictionary } from '@/dictionaries';
-import { getEntries } from '@/lib/content';
-import EntryList from '@/components/EntryList';
+import { getPosts } from '@/lib/content';
+import PostList from '@/components/PostList';
 
 export function generateStaticParams() {
   return [{ lang: 'pt' }, { lang: 'en' }];
@@ -14,13 +14,7 @@ export default async function PostsPage({ params }) {
     <main>
       <h1 className="page-title">{dict.content.postsTitle}</h1>
       <p className="page-intro">{dict.content.postsIntro}</p>
-
-      <EntryList
-        lang={lang}
-        dict={dict}
-        collection="posts"
-        entries={getEntries('posts', lang)}
-      />
+      <PostList lang={lang} dict={dict} posts={getPosts(lang)} />
     </main>
   );
 }

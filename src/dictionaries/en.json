@@ -26,7 +26,9 @@
     "postsIntro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     "empty": "Nothing published yet.",
     "readingTime": "min read",
-    "words": "words"
+    "words": "words",
+    "searchPlaceholder": "Type to search...",
+    "noResults": "No results found."
   },
   "about": {
     "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
@@ -74,17 +76,59 @@
   },
   "skills": {
     "groups": [
-      { "category": "Lorem", "items": ["Ipsum", "Dolor", "Sit", "Amet"] },
-      { "category": "Consectetur", "items": ["Adipiscing", "Elit", "Sed"] },
-      { "category": "Eiusmod", "items": ["Tempor", "Incididunt", "Labore"] },
-      { "category": "Magna", "items": ["Aliqua", "Enim", "Minim", "Veniam"] }
+      {
+        "category": "Lorem",
+        "items": [
+          "Ipsum",
+          "Dolor",
+          "Sit",
+          "Amet"
+        ]
+      },
+      {
+        "category": "Consectetur",
+        "items": [
+          "Adipiscing",
+          "Elit",
+          "Sed"
+        ]
+      },
+      {
+        "category": "Eiusmod",
+        "items": [
+          "Tempor",
+          "Incididunt",
+          "Labore"
+        ]
+      },
+      {
+        "category": "Magna",
+        "items": [
+          "Aliqua",
+          "Enim",
+          "Minim",
+          "Veniam"
+        ]
+      }
     ]
   },
   "certifications": {
     "items": [
-      { "name": "Lorem Ipsum Certification", "issuer": "Dolor Sit", "date": "03/2026" },
-      { "name": "Consectetur Adipiscing Elit", "issuer": "Amet", "date": "01/2026" },
-      { "name": "Sed Do Eiusmod Tempor", "issuer": "Incididunt", "date": "08/2025" }
+      {
+        "name": "Lorem Ipsum Certification",
+        "issuer": "Dolor Sit",
+        "date": "03/2026"
+      },
+      {
+        "name": "Consectetur Adipiscing Elit",
+        "issuer": "Amet",
+        "date": "01/2026"
+      },
+      {
+        "name": "Sed Do Eiusmod Tempor",
+        "issuer": "Incididunt",
+        "date": "08/2025"
+      }
     ]
   },
   "education": {
@@ -105,10 +149,22 @@
   },
   "languages": {
     "items": [
-      { "name": "Portuguese", "level": "Native" },
-      { "name": "English", "level": "Advanced" },
-      { "name": "Spanish", "level": "Fluent" },
-      { "name": "Italian", "level": "Intermediate" }
+      {
+        "name": "Portuguese",
+        "level": "Native"
+      },
+      {
+        "name": "English",
+        "level": "Advanced"
+      },
+      {
+        "name": "Spanish",
+        "level": "Fluent"
+      },
+      {
+        "name": "Italian",
+        "level": "Intermediate"
+      }
     ]
   },
   "softSkills": {
@@ -121,8 +177,14 @@
   },
   "links": {
     "items": [
-      { "label": "GitHub", "url": "https://github.com/wtfpac" },
-      { "label": "LinkedIn", "url": "https://www.linkedin.com/in/w7ll/" }
+      {
+        "label": "GitHub",
+        "url": "https://github.com/wtfpac"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/w7ll/"
+      }
     ]
   }
 }

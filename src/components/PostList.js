@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import PostMeta from './PostMeta';
 
-export default function PostList({ lang, dict, posts }) {
+export default function PostList({ lang, dict, posts, emptyMessage }) {
   if (posts.length === 0) {
-    return <p className="empty-state">{dict.content.empty}</p>;
+    return <p className="empty-state">{emptyMessage ?? dict.content.empty}</p>;
   }
 
   return (
