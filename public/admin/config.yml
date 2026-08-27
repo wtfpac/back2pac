@@ -1,0 +1,51 @@
+backend:
+  name: github
+  repo: wtfpac/pacfolio
+  branch: main
+  # Aponta para as rotas de autenticação que criamos
+  base_url: https://back2pac.vercel.app
+  auth_endpoint: api/auth
+
+media_folder: public/images
+public_folder: /images
+
+# multiple_folders faz cada idioma virar uma subpasta,
+# que é exatamente a estrutura content/posts/pt e content/posts/en
+i18n:
+  structure: multiple_folders
+  locales: [pt, en]
+  default_locale: pt
+
+collections:
+  - name: posts
+    label: Posts
+    label_singular: Post
+    folder: content/posts
+    create: true
+    slug: '{{slug}}'
+    i18n: true
+    fields:
+      - { name: title, label: Título, widget: string, i18n: true }
+      # i18n: duplicate mantém o mesmo valor nos dois idiomas
+      - {
+          name: date,
+          label: Data,
+          widget: datetime,
+          date_format: 'YYYY-MM-DD',
+          time_format: false,
+          format: 'YYYY-MM-DD',
+          i18n: duplicate,
+        }
+      - { name: summary, label: Resumo, widget: text, i18n: true }
+      - { name: categories, label: Categorias, widget: list, i18n: true }
+      - { name: body, label: Conteúdo, widget: markdown, i18n: true }
+
+  - name: settings
+    label: Configurações
+    files:
+      - name: site
+        label: Site
+        file: content/settings.json
+        fields:
+          - { name: siteUrl, label: URL do site, widget: string }
+          - { name: showSearch, label: Mostrar busca no menu, widget: boolean }

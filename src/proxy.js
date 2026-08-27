@@ -19,7 +19,7 @@ export function proxy(request) {
 }
 
 export const config = {
-  // Não rodar em: rotas de API, arquivos internos do Next, favicon,
+  // Não rodar em: painel, rotas de API, arquivos internos do Next, favicon,
   // e qualquer caminho com ponto no nome (sitemap.xml, robots.txt, imagens)
-  matcher: ['/((?!api|_next|favicon.ico|.*\\..*).*)'],
+  matcher: ['/((?!admin|api|_next|favicon.ico|.*\\..*).*)'],
 };
