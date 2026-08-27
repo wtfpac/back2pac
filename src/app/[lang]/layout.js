@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/next';
 import '@fontsource/commit-mono/400.css';
 import '@fontsource/commit-mono/700.css';
 import './../globals.css';
@@ -39,7 +40,7 @@ export default async function RootLayout({ children, params }) {
   const dict = await getDictionary(lang);
 
   return (
-    // sem data-theme aqui o atributo e escrito so pelo ThemeToggle
+    // sem data-theme aqui: o atributo e escrito so pelo ThemeToggle.
     // se ficasse no jsx, o react o reverteria a cada navegacao
     <html lang={lang} suppressHydrationWarning>
       <body>
@@ -48,6 +49,7 @@ export default async function RootLayout({ children, params }) {
         <footer className="site-footer">
           <p>© 2026 Back 2 Pac</p>
         </footer>
+        <Analytics />
       </body>
     </html>
   );
