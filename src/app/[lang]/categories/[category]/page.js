@@ -10,11 +10,18 @@ export function generateStaticParams() {
   );
 }
 
+export async function generateMetadata({ params }) {
+  const { lang, category } = await params;
+  const found = getCategories(lang).find((item) => item.slug === category);
+
+  return found ? { title: found.name } : {};
+}
+
 export default async function CategoryPage({ params }) {
   const { lang, category } = await params;
   const dict = await getDictionary(lang);
 
-  // Precisamos do nome original para o título: a URL só tem o slug
+  // Precisamos do nome original para o título, a url so tem slug
   const found = getCategories(lang).find((item) => item.slug === category);
   if (!found) notFound();
 

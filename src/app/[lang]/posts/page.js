@@ -6,6 +6,13 @@ export function generateStaticParams() {
   return [{ lang: 'pt' }, { lang: 'en' }];
 }
 
+export async function generateMetadata({ params }) {
+  const { lang } = await params;
+  const dict = await getDictionary(lang);
+
+  return { title: dict.content.postsTitle };
+}
+
 export default async function PostsPage({ params }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);

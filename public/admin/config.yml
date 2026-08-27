@@ -2,15 +2,23 @@ backend:
   name: github
   repo: wtfpac/pacfolio
   branch: main
-  # Aponta para as rotas de autenticação que criamos
+  # aponta para as rotas de autenticacao que criamos
   base_url: https://back2pac.vercel.app
   auth_endpoint: api/auth
+
+# idioma da interface do painel
+locale: pt
+
+# tira o painel de preview de todas as colecoes
+editor:
+  preview: false
 
 media_folder: public/images
 public_folder: /images
 
 # multiple_folders faz cada idioma virar uma subpasta,
-# que é exatamente a estrutura content/posts/pt e content/posts/en
+# igual a estrutura content/posts/pt e content/posts/en.
+# a ordem desta lista define a ordem das colunas no editor
 i18n:
   structure: multiple_folders
   locales: [pt, en]
@@ -26,7 +34,7 @@ collections:
     i18n: true
     fields:
       - { name: title, label: Título, widget: string, i18n: true }
-      # i18n: duplicate mantém o mesmo valor nos dois idiomas
+      # i18n duplicate mantem o mesmo valor nos dois idiomas
       - {
           name: date,
           label: Data,

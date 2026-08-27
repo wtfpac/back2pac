@@ -107,18 +107,17 @@ a:hover {
 .theme-toggle {
   display: grid;
   place-items: center;
-  width: 30px;
-  height: 30px;
   padding: 0;
   background: transparent;
-  /* currentColor dos ícones herda daqui: branco no escuro, preto no claro */
+  border: none;
+  /* currentColor dos ícones herda daqui: claro no tema escuro, escuro no claro */
   color: var(--fg);
-  border: 1px solid var(--border);
   cursor: pointer;
+  line-height: 0;
 }
 
 .theme-toggle:hover {
-  border-color: var(--fg-muted);
+  opacity: 0.65;
 }
 
 /* Os dois ícones ocupam a mesma célula do grid, sobrepostos */
@@ -156,7 +155,7 @@ a:hover {
   text-decoration: none;
 }
 
-/* Bloco preenchido usando --border: fica visível nos dois temas
+/* Bloco preenchido usando --border: visível nos dois temas
    sem trocar as cores de papel quando o tema muda */
 .lang-option[data-active="true"] {
   background: var(--border);

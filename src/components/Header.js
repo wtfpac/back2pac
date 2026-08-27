@@ -9,9 +9,7 @@ export default function Header({ lang, dict }) {
   return (
     <header className="site-header">
       <div className="header-inner">
-        <Link href={`/${lang}`} className="brand">
-          Wellington Alves Clemente
-        </Link>
+        <ThemeToggle />
 
         <nav className="main-nav">
           <ul>
@@ -25,7 +23,6 @@ export default function Header({ lang, dict }) {
         </nav>
 
         <div className="header-actions">
-          <ThemeToggle />
           <LanguageSwitcher lang={lang} />
         </div>
       </div>
