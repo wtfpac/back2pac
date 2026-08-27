@@ -1,18 +1,30 @@
-'use client'; // usePathname só existe no navegador
+'use client';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+const LANGUAGES = [
+  { code: 'pt', label: 'pt-BR' },
+  { code: 'en', label: 'en-US' },
+];
+
 export default function LanguageSwitcher({ lang }) {
-  // Caminho atual da URL, ex: "/pt/posts"
   const pathname = usePathname();
 
-  // O idioma para onde o botão leva
-  const nextLang = lang === 'pt' ? 'en' : 'pt';
-
-  // Troca só o pedaço do idioma: "/pt/posts" vira "/en/posts".
-  // replace troca a PRIMEIRA ocorrência, que é sempre o início da URL.
-  const href = pathname.replace(`/${lang}`, `/${nextLang}`);
-
-  return <Link href={href}>{nextLang.toUpperCase()}</Link>;
+  return (
+    <div className="lang-switch">
+      {LANGUAGES.map(({ code, label }) => (
+        <Link
+          key={code}
+          // Troca só o pedaço do idioma: "/pt/posts" vira "/en/posts"
+          href={pathname.replace(`/${lang}`, `/${code}`)}
+          className="lang-option"
+          data-active={code === lang}
+          aria-current={code === lang ? 'page' : undefined}
+        >
+          {label}
+        </Link>
+      ))}
+    </div>
+  );
 }

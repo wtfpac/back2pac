@@ -34,6 +34,23 @@ body {
   line-height: 1.6;
 }
 
+/* Suaviza a troca de tema em vez de piscar de uma cor para outra.
+   Lista explícita em vez de *, que forçaria o navegador a recalcular
+   o estilo de cada elemento da página */
+body,
+.site-header,
+.site-footer,
+.section-title,
+.entry-list-item,
+.category-list li,
+.tag,
+.search-input,
+.theme-toggle,
+.lang-option {
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+    color 0.3s ease;
+}
+
 a {
   color: var(--accent);
   text-decoration: none;
@@ -82,27 +99,71 @@ a:hover {
 .header-actions {
   margin-left: auto;
   display: flex;
+  align-items: center;
   gap: 0.5rem;
 }
 
-.header-actions button,
-.header-actions a {
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  padding: 0.25rem 0.6rem;
+/* ---- Botão de tema ---- */
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
   background: var(--bg-soft);
   color: var(--fg);
   border: 1px solid var(--border);
   border-radius: 4px;
   cursor: pointer;
-  line-height: 1.4;
 }
 
-.header-actions button:hover,
-.header-actions a:hover {
+.theme-toggle:hover {
   border-color: var(--accent);
   color: var(--accent);
+}
+
+/* Os dois ícones ocupam a mesma célula do grid, sobrepostos */
+.theme-icon {
+  grid-area: 1 / 1;
+  display: flex;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.theme-icon[data-visible="false"] {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+.theme-icon[data-visible="true"] {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+
+/* ---- Seletor de idioma ---- */
+.lang-switch {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.lang-option {
+  padding: 0.35rem 0.55rem;
+  background: var(--bg-soft);
+  color: var(--fg-muted);
+  line-height: 1;
+}
+
+.lang-option:hover {
+  color: var(--fg);
   text-decoration: none;
+}
+
+.lang-option[data-active="true"] {
+  background: var(--fg);
+  color: var(--bg);
 }
 
 /* ---- Conteúdo ---- */
@@ -228,6 +289,12 @@ a:hover {
   color: var(--fg-muted);
 }
 
+a.tag:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
 /* ---- Listas ---- */
 .plain-list {
   list-style: none;
@@ -248,16 +315,7 @@ a:hover {
   gap: 1.2rem;
 }
 
-@media (max-width: 600px) {
-  .hero-name {
-    font-size: 1.6rem;
-  }
-
-  .skill-category {
-    min-width: auto;
-  }
-}
-
+/* ---- Páginas internas ---- */
 .page-title {
   font-size: 1.6rem;
   margin: 0 0 0.5rem;
@@ -268,6 +326,7 @@ a:hover {
   margin: 0 0 2rem;
 }
 
+/* ---- Listagem de posts ---- */
 .entry-list {
   list-style: none;
   padding: 0;
@@ -309,6 +368,7 @@ a:hover {
   font-style: italic;
 }
 
+/* ---- Corpo do post ---- */
 .prose {
   margin-top: 2rem;
 }
@@ -347,6 +407,7 @@ a:hover {
   color: var(--fg-muted);
 }
 
+/* ---- Busca ---- */
 .search-input {
   width: 100%;
   padding: 0.7rem 0.9rem;
@@ -364,6 +425,7 @@ a:hover {
   outline-offset: 1px;
 }
 
+/* ---- Categorias ---- */
 .category-list {
   list-style: none;
   padding: 0;
@@ -383,8 +445,13 @@ a:hover {
   color: var(--fg-muted);
 }
 
-a.tag:hover {
-  color: var(--accent);
-  border-color: var(--accent);
-  text-decoration: none;
+/* ---- Responsivo ---- */
+@media (max-width: 600px) {
+  .hero-name {
+    font-size: 1.6rem;
+  }
+
+  .skill-category {
+    min-width: auto;
+  }
 }
