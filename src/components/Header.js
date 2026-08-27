@@ -20,9 +20,7 @@ export default function Header({ lang, dict }) {
             {/* Todo link interno carrega o idioma atual na URL */}
             <li><Link href={`/${lang}`}>{dict.nav.home}</Link></li>
             <li><Link href={`/${lang}/posts`}>{dict.nav.posts}</Link></li>
-            <li><Link href={`/${lang}/research`}>{dict.nav.research}</Link></li>
             <li><Link href={`/${lang}/categories`}>{dict.nav.categories}</Link></li>
-            <li><Link href={`/${lang}/search`}>{dict.nav.search}</Link></li>
           </ul>
         </nav>
 

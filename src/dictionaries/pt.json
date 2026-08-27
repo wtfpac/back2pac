@@ -2,7 +2,6 @@
   "nav": {
     "home": "Início",
     "posts": "Posts",
-    "research": "Pesquisa",
     "categories": "Categorias",
     "search": "Busca"
   },
@@ -21,6 +20,13 @@
     "languages": "Idiomas",
     "softSkills": "Soft Skills",
     "links": "Links"
+  },
+  "content": {
+    "postsTitle": "Posts",
+    "postsIntro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "empty": "Nenhum conteúdo publicado ainda.",
+    "readingTime": "min de leitura",
+    "words": "palavras"
   },
   "about": {
     "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
@@ -115,18 +121,8 @@
   },
   "links": {
     "items": [
-      { "label": "GitHub", "url": "https://github.com/SEU-USUARIO" },
+      { "label": "GitHub", "url": "https://github.com/wtfpac" },
       { "label": "LinkedIn", "url": "https://www.linkedin.com/in/w7ll/" }
     ]
-  },
-  "content": {
-  "postsTitle": "Posts",
-  "postsIntro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  "researchTitle": "Pesquisa",
-  "researchIntro": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  "empty": "Nenhum conteúdo publicado ainda.",
-  "readingTime": "min de leitura",
-  "words": "palavras"
   }
 }
-

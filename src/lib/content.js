@@ -4,20 +4,15 @@ import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
 
-const CONTENT_ROOT = path.join(process.cwd(), 'content');
+const POSTS_DIR = path.join(process.cwd(), 'content', 'posts');
 const WORDS_PER_MINUTE = 200;
 
-function collectionDir(collection, lang) {
-  return path.join(CONTENT_ROOT, collection, lang);
+function read(lang, slug) {
+  const file = path.join(POSTS_DIR, lang, `${slug}.md`);
+  return fs.existsSync(file) ? matter(fs.readFileSync(file, 'utf8')) : null;
 }
 
-function readFile(collection, lang, slug) {
-  const filePath = path.join(collectionDir(collection, lang), `${slug}.md`);
-  if (!fs.existsSync(filePath)) return null;
-  return matter(fs.readFileSync(filePath, 'utf8'));
-}
-
-function buildMeta(slug, data, content) {
+function toMeta(slug, { data, content }) {
   const wordCount = content.trim().split(/\s+/).filter(Boolean).length;
 
   return {
@@ -31,8 +26,8 @@ function buildMeta(slug, data, content) {
   };
 }
 
-export function getSlugs(collection, lang) {
-  const dir = collectionDir(collection, lang);
+export function getSlugs(lang) {
+  const dir = path.join(POSTS_DIR, lang);
   if (!fs.existsSync(dir)) return [];
 
   return fs
@@ -41,30 +36,20 @@ export function getSlugs(collection, lang) {
     .map((file) => file.replace(/\.md$/, ''));
 }
 
-export function getEntries(collection, lang) {
-  return getSlugs(collection, lang)
+export function getPosts(lang) {
+  return getSlugs(lang)
     .map((slug) => {
-      const file = readFile(collection, lang, slug);
-      return file && buildMeta(slug, file.data, file.content);
+      const file = read(lang, slug);
+      return file && toMeta(slug, file);
     })
     .filter(Boolean)
     .sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
-export async function getEntry(collection, lang, slug) {
-  const file = readFile(collection, lang, slug);
+export async function getPost(lang, slug) {
+  const file = read(lang, slug);
   if (!file) return null;
 
   const processed = await remark().use(html).process(file.content);
-
-  return {
-    ...buildMeta(slug, file.data, file.content),
-    html: processed.toString(),
-  };
-}
-
-export function getAllEntries(lang) {
-  return ['posts', 'research'].flatMap((collection) =>
-    getEntries(collection, lang).map((entry) => ({ ...entry, collection }))
-  );
+  return { ...toMeta(slug, file), html: processed.toString() };
 }
