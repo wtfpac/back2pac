@@ -2,6 +2,7 @@ import './../globals.css';
 import Header from '@/components/Header';
 import { getDictionary } from '@/dictionaries';
 import { getSettings } from '@/lib/content';
+import { Analytics } from "@vercel/analytics/next"
 
 export function generateStaticParams() {
   return [{ lang: 'pt' }, { lang: 'en' }];
