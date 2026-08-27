@@ -13,7 +13,7 @@ const WORDS_PER_MINUTE = 200;
 
 /* ---------- Configurações do site ---------- */
 
-// Fica em content/ (e não em src/) para o painel admin poder editar depois
+// Fica em content/ (e não em src/) para o painel admin poder editar
 export function getSettings() {
   const file = path.join(CONTENT_DIR, 'settings.json');
   return JSON.parse(fs.readFileSync(file, 'utf8'));
@@ -27,6 +27,14 @@ function read(lang, slug) {
   return fs.existsSync(file) ? matter(fs.readFileSync(file, 'utf8')) : null;
 }
 
+// O YAML entrega a data como objeto Date quando ela vem sem aspas
+// (formato que o painel admin usa); padronizamos tudo em "AAAA-MM-DD"
+function toDateString(value) {
+  if (!value) return null;
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date.toISOString().slice(0, 10);
+}
+
 function toMeta(slug, { data, content }) {
   const wordCount = content.trim().split(/\s+/).filter(Boolean).length;
 
@@ -34,7 +42,7 @@ function toMeta(slug, { data, content }) {
     slug,
     // ?? garante valor padrão caso o post esqueça algum campo no cabeçalho
     title: data.title ?? slug,
-    date: data.date ?? null,
+    date: toDateString(data.date),
     summary: data.summary ?? '',
     categories: data.categories ?? [],
     wordCount,
