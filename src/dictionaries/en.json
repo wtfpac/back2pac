@@ -5,8 +5,12 @@
     "categories": "Categories",
     "search": "Search"
   },
+  "meta": {
+    "title": "Back 2 Pac",
+    "description": "Wellington Alves Clemente — IT infrastructure and web development, based in Brazil."
+  },
   "hero": {
-    "role": "Developer and IT Support",
+    "role": "IT Infrastructure and Web Development",
     "location": "Foz do Iguaçu, Brazil",
     "available": "Available for new opportunities"
   },
@@ -14,16 +18,16 @@
     "about": "About",
     "contact": "Contact",
     "experience": "Experience",
+    "projects": "Projects",
     "skills": "Skills",
     "certifications": "Certifications",
     "education": "Education",
     "languages": "Languages",
-    "softSkills": "Soft Skills",
     "links": "Links"
   },
   "content": {
     "postsTitle": "Posts",
-    "postsIntro": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "postsIntro": "Notes on infrastructure, development and whatever I'm learning.",
     "empty": "Nothing published yet.",
     "readingTime": "min read",
     "words": "words",
@@ -31,164 +35,106 @@
     "noResults": "No results found."
   },
   "about": {
-    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    "text": "I work with IT infrastructure and web development. Day to day I handle virtualization, monitoring and automation in a corporate environment, and in personal projects I build applications with Next.js, React and TypeScript. I hold a degree in Systems Analysis and Development, am currently studying Software Engineering at Uniamérica, and am Red Hat certified in Linux system administration."
   },
   "contact": {
     "emailLabel": "Email",
-    "phoneLabel": "Phone",
     "email": "contatoeipac@gmail.com",
-    "phone": "+55 45 99941-4753",
     "linkedin": "https://www.linkedin.com/in/w7ll/",
     "github": "https://github.com/wtfpac"
   },
   "experience": {
     "items": [
       {
-        "role": "Lorem Ipsum Dolor",
-        "company": "Consectetur Adipiscing",
+        "role": "Support Analyst",
+        "company": "Altomax",
+        "period": "05/2026 – present",
+        "summary": "Infrastructure and support: virtualization, server monitoring, automation and network administration."
+      },
+      {
+        "role": "Developer",
+        "company": "Independent projects and freelance",
+        "period": "01/2026 – 05/2026",
+        "summary": "Freelance web development, an original game project and Red Hat certifications in Linux administration."
+      },
+      {
+        "role": "IT Support Technician",
+        "company": "Vertical Informática",
         "period": "10/2025 – 12/2025",
-        "bullets": [
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-          "Sed do eiusmod tempor incididunt ut labore et dolore magna",
-          "Ut enim ad minim veniam, quis nostrud exercitation ullamco"
-        ]
+        "summary": "User support, ticket resolution and maintenance of corporate environments."
       },
       {
-        "role": "Sed Eiusmod Tempor",
-        "company": "Incididunt Labore",
+        "role": "IT Support and Infrastructure Intern",
+        "company": "Itaipu Binacional",
         "period": "06/2024 – 10/2025",
-        "bullets": [
-          "Duis aute irure dolor in reprehenderit in voluptate velit",
-          "Excepteur sint occaecat cupidatat non proident sunt",
-          "Culpa qui officia deserunt mollit anim id est laborum"
-        ]
+        "summary": "User support, Active Directory, PowerShell automation and network infrastructure."
       },
       {
-        "role": "Ut Enim Minim",
-        "company": "Veniam Nostrud",
+        "role": "Junior Frontend Developer",
+        "company": "Estúdio Lumos",
         "period": "02/2022 – 11/2022",
-        "bullets": [
-          "Nemo enim ipsam voluptatem quia voluptas sit aspernatur",
-          "Neque porro quisquam est qui dolorem ipsum quia dolor"
-        ]
+        "summary": "Development of landing pages and corporate websites."
+      }
+    ]
+  },
+  "projects": {
+    "items": [
+      {
+        "name": "XFIGHTCLUB",
+        "summary": "Web invitation app with unique codes, automated distribution and self-managed cloud deployment.",
+        "tech": ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Docker", "AWS"]
+      },
+      {
+        "name": "Triggered",
+        "summary": "Original game in development, currently being migrated from Godot to Unity.",
+        "tech": ["Godot", "Unity"]
       }
     ]
   },
   "skills": {
     "groups": [
-      {
-        "category": "Lorem",
-        "items": [
-          "Ipsum",
-          "Dolor",
-          "Sit",
-          "Amet"
-        ]
-      },
-      {
-        "category": "Consectetur",
-        "items": [
-          "Adipiscing",
-          "Elit",
-          "Sed"
-        ]
-      },
-      {
-        "category": "Eiusmod",
-        "items": [
-          "Tempor",
-          "Incididunt",
-          "Labore"
-        ]
-      },
-      {
-        "category": "Magna",
-        "items": [
-          "Aliqua",
-          "Enim",
-          "Minim",
-          "Veniam"
-        ]
-      }
+      { "category": "Infrastructure", "items": ["Proxmox VE", "Windows Server", "Active Directory", "Linux"] },
+      { "category": "Monitoring", "items": ["Zabbix", "Grafana"] },
+      { "category": "Networking", "items": ["pfSense", "DHCP", "VoIP"] },
+      { "category": "Microsoft 365", "items": ["Entra ID", "SharePoint", "Exchange"] },
+      { "category": "Cloud & DevOps", "items": ["AWS", "Vercel", "Docker", "Nginx", "GitHub Actions"] },
+      { "category": "Back-end", "items": ["Node.js", "Java", "Spring Boot", "Python", "C", "C++"] },
+      { "category": "Front-end", "items": ["React", "Next.js", "Angular", "TypeScript", "JavaScript", "HTML", "CSS", "Tailwind"] },
+      { "category": "Databases", "items": ["PostgreSQL", "MySQL", "MongoDB", "Prisma", "Hibernate"] },
+      { "category": "Security", "items": ["OAuth", "Keycloak", "JWT", "HTTPS/TLS"] },
+      { "category": "Agile", "items": ["Scrum", "Kanban"] },
+      { "category": "Tools", "items": ["Git", "PowerShell", "Postman", "Jira", "Trello", "Figma", "Godot", "Unity"] }
     ]
   },
   "certifications": {
     "items": [
-      {
-        "name": "Lorem Ipsum Certification",
-        "issuer": "Dolor Sit",
-        "date": "03/2026"
-      },
-      {
-        "name": "Consectetur Adipiscing Elit",
-        "issuer": "Amet",
-        "date": "01/2026"
-      },
-      {
-        "name": "Sed Do Eiusmod Tempor",
-        "issuer": "Incididunt",
-        "date": "08/2025"
-      }
+      { "name": "Red Hat System Administration II (RH134)", "issuer": "Red Hat", "date": "08/2026" },
+      { "name": "Red Hat System Administration I (RH124)", "issuer": "Red Hat", "date": "08/2026" },
+      { "name": "Mendix Rapid Developer Certification", "issuer": "Mendix", "date": "03/2026" },
+      { "name": "HTML5: Foundations for Modern Web Pages", "issuer": "IFRS", "date": "01/2026" },
+      { "name": "Database Administrator", "issuer": "IFRS", "date": "08/2025" },
+      { "name": "Windows Server 2016: Active Directory", "issuer": "IFRS", "date": "07/2025" },
+      { "name": "Programming Logic", "issuer": "IFRS", "date": "07/2023" }
     ]
   },
   "education": {
     "items": [
-      {
-        "course": "Lorem Ipsum Dolor",
-        "school": "Sit Amet",
-        "period": "07/2025 – 12/2026",
-        "status": "In progress"
-      },
-      {
-        "course": "Consectetur Adipiscing",
-        "school": "Elit Sed",
-        "period": "01/2023 – 06/2025",
-        "status": "Completed"
-      }
+      { "course": "Software Engineering", "school": "Uniamérica", "period": "07/2025 – 12/2026", "status": "In progress" },
+      { "course": "Systems Analysis and Development", "school": "Uniamérica", "period": "01/2023 – 06/2025", "status": "Completed" }
     ]
   },
   "languages": {
     "items": [
-      {
-        "name": "Portuguese",
-        "level": "Native"
-      },
-      {
-        "name": "English",
-        "level": "Advanced"
-      },
-      {
-        "name": "Spanish",
-        "level": "Fluent"
-      },
-      {
-        "name": "Italian",
-        "level": "Intermediate"
-      }
-    ]
-  },
-  "softSkills": {
-    "items": [
-      "Lorem ipsum dolor sit amet consectetur",
-      "Adipiscing elit sed do eiusmod tempor",
-      "Incididunt ut labore et dolore magna aliqua",
-      "Ut enim ad minim veniam quis nostrud"
+      { "name": "Portuguese", "level": "Native" },
+      { "name": "English", "level": "Advanced" },
+      { "name": "Spanish", "level": "Fluent" },
+      { "name": "Italian", "level": "Intermediate" }
     ]
   },
   "links": {
     "items": [
-      {
-        "label": "GitHub",
-        "url": "https://github.com/wtfpac"
-      },
-      {
-        "label": "LinkedIn",
-        "url": "https://www.linkedin.com/in/w7ll/"
-      }
+      { "label": "GitHub", "url": "https://github.com/wtfpac" },
+      { "label": "LinkedIn", "url": "https://www.linkedin.com/in/w7ll/" }
     ]
-  },
-  "meta": {
-    "title": "Back 2 Pac",
-    "description": "Developer and IT support professional based in Foz do Iguaçu, Brazil. Back-end, front-end, infrastructure and cloud."
   }
 }

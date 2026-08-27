@@ -8,7 +8,7 @@ export default async function Home({ params }) {
   return (
     <main>
       <div className="hero">
-        <h1 className="hero-name">Wellington Alves Clemente</h1>
+        <h1 className="hero-name">Wellington Alves</h1>
         <p className="hero-tagline">{dict.hero.role} · {dict.hero.location}</p>
         <span className="hero-status">{dict.hero.available}</span>
       </div>
@@ -23,11 +23,16 @@ export default async function Home({ params }) {
             {dict.contact.emailLabel}:{' '}
             <a href={`mailto:${dict.contact.email}`}>{dict.contact.email}</a>
           </li>
-          <li>{dict.contact.phoneLabel}: {dict.contact.phone}</li>
           <li>
             LinkedIn:{' '}
             <a href={dict.contact.linkedin} target="_blank" rel="noopener noreferrer">
-              {dict.contact.linkedin}
+              linkedin.com/in/w7ll
+            </a>
+          </li>
+          <li>
+            GitHub:{' '}
+            <a href={dict.contact.github} target="_blank" rel="noopener noreferrer">
+              github.com/wtfpac
             </a>
           </li>
         </ul>
@@ -35,14 +40,30 @@ export default async function Home({ params }) {
 
       <Section id="experience" title={dict.sections.experience}>
         {dict.experience.items.map((job) => (
+          // empresa + periodo como chave: dois cargos iguais em empresas
+          // diferentes nao colidem
           <article key={`${job.company}-${job.period}`} className="entry">
             <div className="entry-head">
               <span>{job.role} — <span className="entry-org">{job.company}</span></span>
               <span className="entry-date">{job.period}</span>
             </div>
-            <ul>
-              {job.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
-            </ul>
+            <p className="entry-note">{job.summary}</p>
+          </article>
+        ))}
+      </Section>
+
+      <Section id="projects" title={dict.sections.projects}>
+        {dict.projects.items.map((project) => (
+          <article key={project.name} className="entry">
+            <div className="entry-head">
+              <span>{project.name}</span>
+            </div>
+            <p className="entry-note">{project.summary}</p>
+            <div className="tag-list">
+              {project.tech.map((item) => (
+                <span key={item} className="tag">{item}</span>
+              ))}
+            </div>
           </article>
         ))}
       </Section>
@@ -89,12 +110,6 @@ export default async function Home({ params }) {
             <span key={item.name} className="tag">{item.name} — {item.level}</span>
           ))}
         </div>
-      </Section>
-
-      <Section id="soft-skills" title={dict.sections.softSkills}>
-        <ul>
-          {dict.softSkills.items.map((item) => <li key={item}>{item}</li>)}
-        </ul>
       </Section>
 
       <Section id="links" title={dict.sections.links}>

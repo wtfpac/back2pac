@@ -271,6 +271,10 @@ a:hover {
   gap: 0.4rem;
 }
 
+.entry .tag-list {
+  margin-top: 0.5rem;
+}
+
 .tag {
   font-size: 0.75rem;
   padding: 0.15rem 0.5rem;
