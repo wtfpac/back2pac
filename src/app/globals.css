@@ -1,27 +1,38 @@
-/* ---- Cores: tema escuro (padrão) ---- */
+/* cores: tema escuro, padrao do site */
 :root {
-  --bg: #121417;
-  --bg-soft: #1c2024;
-  --fg: #e8e8e8;
-  --fg-muted: #9aa0a6;
-  --accent: #4fd6c0;
-  --border: #2b3035;
+  --bg: rgb(0, 0, 0);
+  --bg-soft: rgb(38, 38, 38);
+  --fg: rgb(178, 178, 178);
+  --fg-muted: rgb(156, 156, 156);
+  --tertiary: rgb(66, 66, 66);
+  --border: rgb(51, 51, 51);
+  --tint: rgb(220, 220, 220);
+  --tint-2: rgb(170, 170, 170);
+  --link-hover-bg: rgb(208, 208, 208);
+  --link-hover-fg: rgb(0, 0, 0);
 
-  --max-width: 760px;
-  /* --font-mono é definida pelo next/font no layout.js */
+  --main-width: 80ch;
+  --gap: 24px;
+  --font-mono: "Commit Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
 }
 
-/* ---- Cores: tema claro ---- */
+/* cores: tema claro */
 [data-theme="light"] {
-  --bg: #fafafa;
-  --bg-soft: #efefef;
-  --fg: #1a1a1a;
-  --fg-muted: #5c5c5c;
-  --accent: #146b5f;
-  --border: #dcdcdc;
+  --bg: rgb(208, 208, 208);
+  --bg-soft: rgb(192, 192, 192);
+  --fg: rgb(0, 0, 0);
+  --fg-muted: rgb(60, 60, 60);
+  --tertiary: rgb(110, 110, 110);
+  --border: rgb(124, 124, 124);
+  --tint: rgb(0, 0, 0);
+  --tint-2: rgb(70, 70, 70);
+  --link-hover-bg: rgb(0, 0, 0);
+  --link-hover-fg: rgb(220, 220, 220);
 }
 
-* {
+*,
+::before,
+::after {
   box-sizing: border-box;
 }
 
@@ -29,71 +40,69 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--fg);
-  /* Monoespaçada em todo o site, não só nos títulos */
   font-family: var(--font-mono);
-  /* Monoespaçadas ocupam mais largura por caractere; 15px compensa */
-  font-size: 15px;
-  line-height: 1.65;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  /* conjuntos estilisticos da commit mono */
+  font-feature-settings: "ss03", "ss04", "ss05";
+  word-break: break-word;
 }
 
-/* Suaviza a troca de tema em vez de piscar de uma cor para outra.
-   Lista explícita em vez de *, que forçaria o navegador a recalcular
-   o estilo de cada elemento da página */
-body,
-.site-header,
-.site-footer,
-.section-title,
-.entry-list-item,
-.category-list li,
-.tag,
-.search-input,
-.theme-toggle,
-.lang-option {
-  transition: background-color 0.3s ease, border-color 0.3s ease,
-    color 0.3s ease;
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-size: 0.875rem;
+  line-height: 1.2;
+}
+
+::selection {
+  color: var(--bg);
+  background-color: var(--fg);
+}
+
+/* links: sublinhado, e inversao de fundo e texto no hover */
 a {
-  color: var(--accent);
-  text-decoration: none;
-}
-
-a:hover {
+  color: var(--tint);
   text-decoration: underline;
 }
 
-/* ---- Header ---- */
-.site-header {
-  border-bottom: 1px solid var(--border);
+a:hover,
+a:focus-visible {
+  color: var(--link-hover-fg);
+  background-color: var(--link-hover-bg);
+  text-decoration: none;
+  outline: none;
 }
 
-.header-inner {
-  max-width: var(--max-width);
+/* header */
+.site-header {
+  max-width: var(--main-width);
   margin: 0 auto;
-  padding: 1rem 1.25rem;
+}
+
+/* altura vem do padding, nao de line-height: fundo de link acompanha
+   a altura da linha e viraria um bloco alto demais */
+.header-inner {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 1rem;
-}
-
-.brand {
-  font-weight: 600;
-  color: var(--fg);
+  gap: var(--gap);
+  padding: 18px var(--gap);
 }
 
 .main-nav ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: var(--gap);
   list-style: none;
   margin: 0;
   padding: 0;
-  font-size: 0.85rem;
 }
 
 .main-nav a {
-  color: var(--fg-muted);
+  padding: 1px 3px;
 }
 
 .header-actions {
@@ -103,24 +112,23 @@ a:hover {
   gap: 0.5rem;
 }
 
-/* ---- Botão de tema ---- */
+/* botao de tema */
 .theme-toggle {
   display: grid;
   place-items: center;
   padding: 0;
   background: transparent;
   border: none;
-  /* currentColor dos ícones herda daqui: claro no tema escuro, escuro no claro */
-  color: var(--fg);
+  color: var(--tint);
   cursor: pointer;
   line-height: 0;
 }
 
 .theme-toggle:hover {
-  opacity: 0.65;
+  filter: brightness(75%);
 }
 
-/* Os dois ícones ocupam a mesma célula do grid, sobrepostos */
+/* os dois icones ocupam a mesma celula do grid, sobrepostos */
 .theme-icon {
   grid-area: 1 / 1;
   display: flex;
@@ -137,88 +145,119 @@ a:hover {
   transform: rotate(0) scale(1);
 }
 
-/* ---- Seletor de idioma ---- */
+/* seletor de idioma */
 .lang-switch {
   display: inline-flex;
-  font-size: 0.72rem;
+  gap: 0.5rem;
 }
 
 .lang-option {
-  padding: 0.4rem 0.5rem;
-  background: transparent;
-  color: var(--fg-muted);
-  line-height: 1;
+  padding: 1px 3px;
+  line-height: 1.4;
+  color: var(--tint);
+  text-decoration: underline;
 }
 
-.lang-option:hover {
-  color: var(--fg);
+.lang-option[data-active="true"] {
+  color: var(--bg);
+  background-color: var(--tint);
   text-decoration: none;
 }
 
-/* Bloco preenchido usando --border: visível nos dois temas
-   sem trocar as cores de papel quando o tema muda */
-.lang-option[data-active="true"] {
-  background: var(--border);
-  color: var(--fg);
-}
-
-/* ---- Conteúdo ---- */
+/* conteudo */
 .container {
-  max-width: var(--max-width);
+  max-width: var(--main-width);
   margin: 0 auto;
-  padding: 2.5rem 1.25rem 4rem;
+  padding: var(--gap);
+  min-height: calc(100dvh - 120px);
 }
 
 .site-footer {
-  border-top: 1px solid var(--border);
+  position: relative;
+  max-width: var(--main-width);
+  margin: 0 auto;
+  padding: 18px var(--gap);
+  text-align: center;
   color: var(--fg-muted);
-  font-size: 0.8rem;
 }
 
-/* ---- Hero ---- */
+.site-footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--gap);
+  right: var(--gap);
+  height: 1px;
+  background: var(--border);
+}
+
+/* titulos de pagina: maiusculo com --- embaixo */
+.page-title {
+  text-transform: uppercase;
+}
+
+.page-title::after {
+  content: "---";
+  display: block;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+
+.page-intro {
+  color: var(--fg-muted);
+  margin: 0 0 var(--gap);
+}
+
+/* secoes: prefixo ## e titulo clicavel que leva ate a propria secao.
+   scroll-margin-top deixa um respiro acima ao chegar pela ancora */
+.section {
+  margin: 2rem 0;
+  scroll-margin-top: var(--gap);
+}
+
+.section-title {
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.section-title::before {
+  content: "## ";
+  color: var(--fg-muted);
+  font-weight: 400;
+}
+
+.section-title a {
+  padding: 1px 3px;
+}
+
+/* hero */
 .hero {
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
 }
 
 .hero-name {
-  font-size: 1.9rem;
-  font-weight: 600;
-  margin: 0 0 0.25rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 0.4rem;
 }
 
 .hero-tagline {
   color: var(--fg-muted);
-  margin: 0 0 1rem;
+  margin-bottom: 0.6rem;
 }
 
 .hero-status {
   display: inline-block;
-  font-size: 0.78rem;
-  padding: 0.25rem 0.6rem;
-  border: 1px solid var(--accent);
-  color: var(--accent);
+  padding: 1px 6px;
+  border: 1px solid var(--tertiary);
+  color: var(--tint-2);
 }
 
-/* ---- Seções ---- */
-.section {
-  margin: 2.5rem 0;
-  scroll-margin-top: 1.5rem;
-}
-
-.section-title {
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--fg-muted);
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 0.4rem;
-  margin: 0 0 1.2rem;
-}
-
-/* ---- Entradas (experiência, educação) ---- */
+/* entradas: experiencia, educacao, projetos */
 .entry {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
 }
 
 .entry-head {
@@ -226,7 +265,7 @@ a:hover {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 0.4rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .entry-org {
@@ -235,61 +274,69 @@ a:hover {
 }
 
 .entry-date {
-  font-size: 0.78rem;
   color: var(--fg-muted);
+  font-weight: 400;
   white-space: nowrap;
 }
 
 .entry-note {
   color: var(--fg-muted);
-  margin: 0.2rem 0 0;
-}
-
-.entry ul {
-  margin: 0.5rem 0 0;
-  padding-left: 1.2rem;
-}
-
-/* ---- Skills e tags ---- */
-.skill-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  align-items: baseline;
-  margin-bottom: 0.7rem;
-}
-
-.skill-category {
-  font-size: 0.82rem;
-  color: var(--fg-muted);
-  min-width: 8rem;
-}
-
-.tag-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
+  margin-top: 0.2rem;
 }
 
 .entry .tag-list {
-  margin-top: 0.5rem;
+  margin-top: 0.4rem;
+}
+
+/* skills */
+.skill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+}
+
+.skill-category {
+  color: var(--fg-muted);
+  min-width: 16ch;
+}
+
+/* tags entre colchetes */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
 }
 
 .tag {
-  font-size: 0.75rem;
-  padding: 0.15rem 0.5rem;
-  background: var(--bg-soft);
-  border: 1px solid var(--border);
-  color: var(--fg-muted);
+  color: var(--tint-2);
+  display: inline;
 }
 
-a.tag:hover {
-  color: var(--accent);
-  border-color: var(--accent);
+/* inline-block impede o sublinhado do link de cobrir os colchetes */
+.tag::before {
+  content: "[";
+  color: var(--tertiary);
+  display: inline-block;
+}
+
+.tag::after {
+  content: "]";
+  color: var(--tertiary);
+  display: inline-block;
+}
+
+a.tag {
   text-decoration: none;
 }
 
-/* ---- Listas ---- */
+a.tag:hover {
+  color: var(--link-hover-fg);
+  background-color: var(--link-hover-bg);
+}
+
+/* listas */
 .plain-list {
   list-style: none;
   padding: 0;
@@ -297,7 +344,7 @@ a.tag:hover {
 }
 
 .plain-list li {
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.2rem;
 }
 
 .inline-list {
@@ -309,19 +356,7 @@ a.tag:hover {
   gap: 1.2rem;
 }
 
-/* ---- Páginas internas ---- */
-.page-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin: 0 0 0.5rem;
-}
-
-.page-intro {
-  color: var(--fg-muted);
-  margin: 0 0 2rem;
-}
-
-/* ---- Listagem de posts ---- */
+/* listagem de posts */
 .entry-list {
   list-style: none;
   padding: 0;
@@ -329,7 +364,8 @@ a.tag:hover {
 }
 
 .entry-list-item {
-  padding: 1.2rem 0;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
   border-bottom: 1px solid var(--border);
 }
 
@@ -337,9 +373,31 @@ a.tag:hover {
   border-bottom: none;
 }
 
+/* o sublinhado fica no span interno para nao cobrir os colchetes */
 .entry-list-title {
-  font-size: 1.05rem;
-  font-weight: 600;
+  text-decoration: none;
+  line-height: 1.1;
+}
+
+.entry-list-title span {
+  text-decoration: underline;
+}
+
+.entry-list-title::before {
+  content: "[";
+  color: var(--tertiary);
+  display: inline-block;
+}
+
+.entry-list-title::after {
+  content: "]";
+  color: var(--tertiary);
+  display: inline-block;
+}
+
+.entry-list-title:hover span,
+.entry-list-title:focus-visible span {
+  text-decoration: none;
 }
 
 .entry-meta {
@@ -347,75 +405,110 @@ a.tag:hover {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.6rem;
-  margin: 0.4rem 0;
-  font-size: 0.75rem;
+  margin: 0.3rem 0;
   color: var(--fg-muted);
+  line-height: 1.3;
 }
 
 .entry-summary {
-  margin: 0.3rem 0 0;
   color: var(--fg-muted);
+  line-height: 1.3;
 }
 
 .empty-state {
   color: var(--fg-muted);
-  font-style: italic;
 }
 
-/* ---- Corpo do post ---- */
+/* corpo do post: titulos com # como no markdown */
 .prose {
-  margin-top: 2rem;
+  color: var(--fg);
+  margin-top: 1.5rem;
 }
 
-.prose h2 {
-  font-size: 1.2rem;
-  margin-top: 2rem;
+.prose :is(h1, h2, h3, h4) {
+  text-transform: uppercase;
+  font-weight: 700;
+  margin: 2rem 0 1rem;
 }
 
-.prose pre {
-  background: var(--bg-soft);
-  border: 1px solid var(--border);
-  padding: 1rem;
-  overflow-x: auto;
-  font-size: 0.85rem;
+.prose h1::before {
+  content: "# ";
+  color: var(--fg-muted);
+  font-weight: 400;
+}
+
+.prose h2::before {
+  content: "## ";
+  color: var(--fg-muted);
+  font-weight: 400;
+}
+
+.prose h3::before {
+  content: "### ";
+  color: var(--fg-muted);
+  font-weight: 400;
+}
+
+.prose h4::before {
+  content: "#### ";
+  color: var(--fg-muted);
+  font-weight: 400;
+}
+
+.prose p,
+.prose ul,
+.prose ol {
+  margin-bottom: 1.2rem;
+  line-height: 1.4;
+}
+
+.prose ul,
+.prose ol {
+  padding-inline-start: 20px;
 }
 
 .prose code {
-  background: var(--bg-soft);
-  padding: 0.1rem 0.3rem;
-  font-size: 0.9em;
-}
-
-.prose pre code {
-  background: none;
-  padding: 0;
-}
-
-.prose blockquote {
-  border-left: 3px solid var(--accent);
-  margin: 1rem 0;
-  padding: 0.2rem 1rem;
-  color: var(--fg-muted);
-}
-
-/* ---- Busca ---- */
-.search-input {
-  width: 100%;
-  padding: 0.7rem 0.9rem;
-  margin-bottom: 1.5rem;
-  font-family: inherit;
-  font-size: 0.95rem;
+  padding: 3px 6px;
   background: var(--bg-soft);
   color: var(--fg);
+}
+
+.prose pre {
+  padding: 1rem;
+  overflow-x: auto;
+  background: var(--bg-soft);
   border: 1px solid var(--border);
 }
 
-.search-input:focus {
-  outline: 2px solid var(--accent);
-  outline-offset: 1px;
+.prose pre code {
+  padding: 0;
+  background: none;
 }
 
-/* ---- Categorias ---- */
+.prose blockquote {
+  margin: 1.2rem 0;
+  padding: 1rem;
+  border-inline-start: 5px solid var(--tertiary);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* busca */
+.search-input {
+  width: 100%;
+  padding: 4px 10px;
+  margin-bottom: var(--gap);
+  font: inherit;
+  color: var(--fg);
+  background: transparent;
+  border: 1px solid var(--tertiary);
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: var(--fg-muted);
+}
+
+/* categorias */
 .category-list {
   list-style: none;
   padding: 0;
@@ -425,19 +518,18 @@ a.tag:hover {
 .category-list li {
   display: flex;
   justify-content: space-between;
-  padding: 0.6rem 0;
-  border-bottom: 1px solid var(--border);
+  padding: 0.3rem 0;
 }
 
 .category-count {
-  font-size: 0.78rem;
   color: var(--fg-muted);
+  user-select: none;
 }
 
-/* responsivvo */
-@media (max-width: 600px) {
-  .hero-name {
-    font-size: 1.5rem;
+/* responsivo */
+@media screen and (max-width: 768px) {
+  :root {
+    --gap: 14px;
   }
 
   .skill-category {

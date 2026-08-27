@@ -1,17 +1,9 @@
-import { IBM_Plex_Mono } from 'next/font/google';
+import '@fontsource/commit-mono/400.css';
+import '@fontsource/commit-mono/700.css';
 import './../globals.css';
 import Header from '@/components/Header';
 import { getDictionary } from '@/dictionaries';
 import { getSettings } from '@/lib/content';
-
-// next/font baixa a fonte durante o build e a serve do seu próprio domínio:
-// nenhuma requisição ao Google em produção e sem salto de layout ao carregar
-const mono = IBM_Plex_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-mono',
-  fallback: ['ui-monospace', 'SFMono-Regular', 'Consolas', 'monospace'],
-});
 
 export function generateStaticParams() {
   return [{ lang: 'pt' }, { lang: 'en' }];
@@ -23,10 +15,10 @@ export async function generateMetadata({ params }) {
   const { siteUrl } = getSettings();
 
   return {
-    // converte caminhos relativos em URLs absolutas nas tags de compartilhamento
+    // converte caminhos relativos em urls absolutas nas tags de compartilhamento
     metadataBase: new URL(siteUrl),
 
-    // titulo da home cada página interna define o seu e substitui este
+    // titulo da home; cada pagina interna define o seu e substitui este
     title: dict.meta.title,
     description: dict.meta.description,
 
@@ -47,14 +39,14 @@ export default async function RootLayout({ children, params }) {
   const dict = await getDictionary(lang);
 
   return (
-    // atributo escrito apenas pelo themetoggle
-    // se ficasse no jsx o react reverte a cada navegaçao
-    <html lang={lang} className={mono.variable} suppressHydrationWarning>
+    // sem data-theme aqui o atributo e escrito so pelo ThemeToggle
+    // se ficasse no jsx, o react o reverteria a cada navegacao
+    <html lang={lang} suppressHydrationWarning>
       <body>
         <Header lang={lang} dict={dict} />
         <div className="container">{children}</div>
         <footer className="site-footer">
-          <div className="header-inner">© 2026 Back 2 Pac</div>
+          <p>© 2026 Back 2 Pac</p>
         </footer>
       </body>
     </html>
