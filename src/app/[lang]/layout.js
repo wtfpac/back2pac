@@ -1,8 +1,18 @@
+import { IBM_Plex_Mono } from 'next/font/google';
 import './../globals.css';
 import Header from '@/components/Header';
 import { getDictionary } from '@/dictionaries';
 import { getSettings } from '@/lib/content';
-import { Analytics } from "@vercel/analytics/next"
+
+// next/font baixa a fonte durante o build e a serve do seu próprio domínio
+// nenhuma requisição ao Google em produção e sem salto de layout ao carregar
+// A variável --font-mono é definida aq e nao no css
+const mono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-mono',
+  fallback: ['ui-monospace', 'SFMono-Regular', 'Consolas', 'monospace'],
+});
 
 export function generateStaticParams() {
   return [{ lang: 'pt' }, { lang: 'en' }];
@@ -19,7 +29,7 @@ export async function generateMetadata({ params }) {
 
     title: {
       default: dict.meta.title,
-      // Páginas com título próprio viram "Primeiro post · Wellington Alves Clemente"
+      // paginas com título próprio viram "first post etc etc
       template: `%s · ${dict.meta.title}`,
     },
     description: dict.meta.description,
@@ -41,8 +51,7 @@ export default async function RootLayout({ children, params }) {
   const dict = await getDictionary(lang);
 
   return (
-    // data-theme="dark" é o padrão; o ThemeToggle troca esse atributo
-    <html lang={lang} data-theme="dark">
+    <html lang={lang} data-theme="dark" className={mono.variable}>
       <body>
         <Header lang={lang} dict={dict} />
         <div className="container">{children}</div>
