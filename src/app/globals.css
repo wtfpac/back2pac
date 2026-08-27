@@ -117,3 +117,138 @@ a:hover {
   color: var(--fg-muted);
   font-size: 0.85rem;
 }
+
+/* ---- Hero ---- */
+.hero {
+  margin-bottom: 3rem;
+}
+
+.hero-name {
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  margin: 0 0 0.25rem;
+}
+
+.hero-tagline {
+  color: var(--fg-muted);
+  margin: 0 0 1rem;
+}
+
+.hero-status {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: 3px;
+}
+
+/* ---- Seções ---- */
+.section {
+  margin: 2.5rem 0;
+  scroll-margin-top: 1.5rem;
+}
+
+.section-title {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--fg-muted);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.4rem;
+  margin: 0 0 1.2rem;
+}
+
+/* ---- Entradas (experiência, educação) ---- */
+.entry {
+  margin-bottom: 1.5rem;
+}
+
+.entry-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.4rem;
+  font-weight: 600;
+}
+
+.entry-org {
+  color: var(--fg-muted);
+  font-weight: 400;
+}
+
+.entry-date {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--fg-muted);
+  white-space: nowrap;
+}
+
+.entry-note {
+  color: var(--fg-muted);
+  margin: 0.2rem 0 0;
+}
+
+.entry ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.2rem;
+}
+
+/* ---- Skills e tags ---- */
+.skill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: baseline;
+  margin-bottom: 0.7rem;
+}
+
+.skill-category {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+  min-width: 8rem;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  padding: 0.15rem 0.5rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--fg-muted);
+}
+
+/* ---- Listas ---- */
+.plain-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.plain-list li {
+  margin-bottom: 0.4rem;
+}
+
+.inline-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+@media (max-width: 600px) {
+  .hero-name { font-size: 1.6rem; }
+  .skill-category { min-width: auto; }
+}

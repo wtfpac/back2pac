@@ -1,3 +1,4 @@
+import Script from 'next/script';
 import './../globals.css';
 import Header from '@/components/Header';
 import { getDictionary } from '@/dictionaries';
@@ -28,10 +29,11 @@ export default async function RootLayout({ children, params }) {
 
   return (
     <html lang={lang} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
       <body>
+        <Script id="theme-init" strategy="beforeInteractive">
+          {themeScript}
+        </Script>
+
         <Header lang={lang} dict={dict} />
         <div className="container">{children}</div>
         <footer className="site-footer">

@@ -23,6 +23,160 @@
     "links": "Links"
   },
   "about": {
-    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+  },
+  "contact": {
+    "emailLabel": "emailLabel",
+    "phoneLabel": "phoneLabel",
+    "email": "contatoeipac@gmail.com",
+    "phone": "+55 45 99941-4753",
+    "linkedin": "https://www.linkedin.com/in/w7ll/",
+    "github": "https://github.com/SEU-USUARIO"
+  },
+  "experience": {
+    "items": [
+      {
+        "role": "Lorem Ipsum Dolor",
+        "company": "Consectetur Adipiscing",
+        "period": "10/2025 – 12/2025",
+        "bullets": [
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+          "Sed do eiusmod tempor incididunt ut labore et dolore magna",
+          "Ut enim ad minim veniam, quis nostrud exercitation ullamco"
+        ]
+      },
+      {
+        "role": "Sed Eiusmod Tempor",
+        "company": "Incididunt Labore",
+        "period": "06/2024 – 10/2025",
+        "bullets": [
+          "Duis aute irure dolor in reprehenderit in voluptate velit",
+          "Excepteur sint occaecat cupidatat non proident sunt",
+          "Culpa qui officia deserunt mollit anim id est laborum"
+        ]
+      },
+      {
+        "role": "Ut Enim Minim",
+        "company": "Veniam Nostrud",
+        "period": "02/2022 – 11/2022",
+        "bullets": [
+          "Nemo enim ipsam voluptatem quia voluptas sit aspernatur",
+          "Neque porro quisquam est qui dolorem ipsum quia dolor"
+        ]
+      }
+    ]
+  },
+  "skills": {
+    "groups": [
+      {
+        "category": "Lorem",
+        "items": [
+          "Ipsum",
+          "Dolor",
+          "Sit",
+          "Amet"
+        ]
+      },
+      {
+        "category": "Consectetur",
+        "items": [
+          "Adipiscing",
+          "Elit",
+          "Sed"
+        ]
+      },
+      {
+        "category": "Eiusmod",
+        "items": [
+          "Tempor",
+          "Incididunt",
+          "Labore"
+        ]
+      },
+      {
+        "category": "Magna",
+        "items": [
+          "Aliqua",
+          "Enim",
+          "Minim",
+          "Veniam"
+        ]
+      }
+    ]
+  },
+  "certifications": {
+    "items": [
+      {
+        "name": "Lorem Ipsum Certification",
+        "issuer": "Dolor Sit",
+        "date": "03/2026"
+      },
+      {
+        "name": "Consectetur Adipiscing Elit",
+        "issuer": "Amet",
+        "date": "01/2026"
+      },
+      {
+        "name": "Sed Do Eiusmod Tempor",
+        "issuer": "Incididunt",
+        "date": "08/2025"
+      }
+    ]
+  },
+  "education": {
+    "items": [
+      {
+        "course": "Lorem Ipsum Dolor",
+        "school": "Sit Amet",
+        "period": "07/2025 – 12/2026",
+        "status": "Cursando"
+      },
+      {
+        "course": "Consectetur Adipiscing",
+        "school": "Elit Sed",
+        "period": "01/2023 – 06/2025",
+        "status": "Concluído"
+      }
+    ]
+  },
+  "languages": {
+    "items": [
+      {
+        "name": "Português",
+        "level": "Nativo"
+      },
+      {
+        "name": "Inglês",
+        "level": "Avançado"
+      },
+      {
+        "name": "Espanhol",
+        "level": "Fluente"
+      },
+      {
+        "name": "Italiano",
+        "level": "Intermediário"
+      }
+    ]
+  },
+  "softSkills": {
+    "items": [
+      "Lorem ipsum dolor sit amet consectetur",
+      "Adipiscing elit sed do eiusmod tempor",
+      "Incididunt ut labore et dolore magna aliqua",
+      "Ut enim ad minim veniam quis nostrud"
+    ]
+  },
+  "links": {
+    "items": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/SEU-USUARIO"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/w7ll/"
+      }
+    ]
   }
 }
