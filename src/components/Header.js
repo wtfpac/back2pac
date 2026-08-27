@@ -19,6 +19,7 @@ export default function Header({ lang, dict }) {
             {showSearch && (
               <li><Link href={`/${lang}/search`}>{dict.nav.search}</Link></li>
             )}
+            <li><Link href={`/${lang}/about`}>{dict.nav.about}</Link></li>
           </ul>
         </nav>
 

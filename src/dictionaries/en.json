@@ -1,6 +1,7 @@
 {
   "nav": {
     "home": "Home",
+    "about": "About",
     "posts": "Posts",
     "categories": "Categories",
     "search": "Search"
@@ -28,6 +29,8 @@
   "content": {
     "postsTitle": "Posts",
     "postsIntro": "Notes on infrastructure, development and whatever I'm learning.",
+    "recentPosts": "Recent posts",
+    "allPosts": "See all posts »",
     "empty": "Nothing published yet.",
     "readingTime": "min read",
     "words": "words",
@@ -82,59 +85,219 @@
       {
         "name": "XFIGHTCLUB",
         "summary": "Web invitation app with unique codes, automated distribution and self-managed cloud deployment.",
-        "tech": ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Docker", "AWS"]
+        "tech": [
+          "Next.js",
+          "TypeScript",
+          "PostgreSQL",
+          "Prisma",
+          "Docker",
+          "AWS"
+        ]
       },
       {
         "name": "Triggered",
         "summary": "Original game in development, currently being migrated from Godot to Unity.",
-        "tech": ["Godot", "Unity"]
+        "tech": [
+          "Godot",
+          "Unity"
+        ]
       }
     ]
   },
   "skills": {
     "groups": [
-      { "category": "Infrastructure", "items": ["Proxmox VE", "Windows Server", "Active Directory", "Linux"] },
-      { "category": "Monitoring", "items": ["Zabbix", "Grafana"] },
-      { "category": "Networking", "items": ["pfSense", "DHCP", "VoIP"] },
-      { "category": "Microsoft 365", "items": ["Entra ID", "SharePoint", "Exchange"] },
-      { "category": "Cloud & DevOps", "items": ["AWS", "Vercel", "Docker", "Nginx", "GitHub Actions"] },
-      { "category": "Back-end", "items": ["Node.js", "Java", "Spring Boot", "Python", "C", "C++"] },
-      { "category": "Front-end", "items": ["React", "Next.js", "Angular", "TypeScript", "JavaScript", "HTML", "CSS", "Tailwind"] },
-      { "category": "Databases", "items": ["PostgreSQL", "MySQL", "MongoDB", "Prisma", "Hibernate"] },
-      { "category": "Security", "items": ["OAuth", "Keycloak", "JWT", "HTTPS/TLS"] },
-      { "category": "Agile", "items": ["Scrum", "Kanban"] },
-      { "category": "Tools", "items": ["Git", "PowerShell", "Postman", "Jira", "Trello", "Figma", "Godot", "Unity"] }
+      {
+        "category": "Infrastructure",
+        "items": [
+          "Proxmox VE",
+          "Windows Server",
+          "Active Directory",
+          "Linux"
+        ]
+      },
+      {
+        "category": "Monitoring",
+        "items": [
+          "Zabbix",
+          "Grafana"
+        ]
+      },
+      {
+        "category": "Networking",
+        "items": [
+          "pfSense",
+          "DHCP",
+          "VoIP"
+        ]
+      },
+      {
+        "category": "Microsoft 365",
+        "items": [
+          "Entra ID",
+          "SharePoint",
+          "Exchange"
+        ]
+      },
+      {
+        "category": "Cloud & DevOps",
+        "items": [
+          "AWS",
+          "Vercel",
+          "Docker",
+          "Nginx",
+          "GitHub Actions"
+        ]
+      },
+      {
+        "category": "Back-end",
+        "items": [
+          "Node.js",
+          "Java",
+          "Spring Boot",
+          "Python",
+          "C",
+          "C++"
+        ]
+      },
+      {
+        "category": "Front-end",
+        "items": [
+          "React",
+          "Next.js",
+          "Angular",
+          "TypeScript",
+          "JavaScript",
+          "HTML",
+          "CSS",
+          "Tailwind"
+        ]
+      },
+      {
+        "category": "Databases",
+        "items": [
+          "PostgreSQL",
+          "MySQL",
+          "MongoDB",
+          "Prisma",
+          "Hibernate"
+        ]
+      },
+      {
+        "category": "Security",
+        "items": [
+          "OAuth",
+          "Keycloak",
+          "JWT",
+          "HTTPS/TLS"
+        ]
+      },
+      {
+        "category": "Agile",
+        "items": [
+          "Scrum",
+          "Kanban"
+        ]
+      },
+      {
+        "category": "Tools",
+        "items": [
+          "Git",
+          "PowerShell",
+          "Postman",
+          "Jira",
+          "Trello",
+          "Figma",
+          "Godot",
+          "Unity"
+        ]
+      }
     ]
   },
   "certifications": {
     "items": [
-      { "name": "Red Hat System Administration II (RH134)", "issuer": "Red Hat", "date": "08/2026" },
-      { "name": "Red Hat System Administration I (RH124)", "issuer": "Red Hat", "date": "08/2026" },
-      { "name": "Mendix Rapid Developer Certification", "issuer": "Mendix", "date": "03/2026" },
-      { "name": "HTML5: Foundations for Modern Web Pages", "issuer": "IFRS", "date": "01/2026" },
-      { "name": "Database Administrator", "issuer": "IFRS", "date": "08/2025" },
-      { "name": "Windows Server 2016: Active Directory", "issuer": "IFRS", "date": "07/2025" },
-      { "name": "Programming Logic", "issuer": "IFRS", "date": "07/2023" }
+      {
+        "name": "Red Hat System Administration II (RH134)",
+        "issuer": "Red Hat",
+        "date": "08/2026"
+      },
+      {
+        "name": "Red Hat System Administration I (RH124)",
+        "issuer": "Red Hat",
+        "date": "08/2026"
+      },
+      {
+        "name": "Mendix Rapid Developer Certification",
+        "issuer": "Mendix",
+        "date": "03/2026"
+      },
+      {
+        "name": "HTML5: Foundations for Modern Web Pages",
+        "issuer": "IFRS",
+        "date": "01/2026"
+      },
+      {
+        "name": "Database Administrator",
+        "issuer": "IFRS",
+        "date": "08/2025"
+      },
+      {
+        "name": "Windows Server 2016: Active Directory",
+        "issuer": "IFRS",
+        "date": "07/2025"
+      },
+      {
+        "name": "Programming Logic",
+        "issuer": "IFRS",
+        "date": "07/2023"
+      }
     ]
   },
   "education": {
     "items": [
-      { "course": "Software Engineering", "school": "Uniamérica", "period": "07/2025 – 12/2026", "status": "In progress" },
-      { "course": "Systems Analysis and Development", "school": "Uniamérica", "period": "01/2023 – 06/2025", "status": "Completed" }
+      {
+        "course": "Software Engineering",
+        "school": "Uniamérica",
+        "period": "07/2025 – 12/2026",
+        "status": "In progress"
+      },
+      {
+        "course": "Systems Analysis and Development",
+        "school": "Uniamérica",
+        "period": "01/2023 – 06/2025",
+        "status": "Completed"
+      }
     ]
   },
   "languages": {
     "items": [
-      { "name": "Portuguese", "level": "Native" },
-      { "name": "English", "level": "Advanced" },
-      { "name": "Spanish", "level": "Fluent" },
-      { "name": "Italian", "level": "Intermediate" }
+      {
+        "name": "Portuguese",
+        "level": "Native"
+      },
+      {
+        "name": "English",
+        "level": "Advanced"
+      },
+      {
+        "name": "Spanish",
+        "level": "Fluent"
+      },
+      {
+        "name": "Italian",
+        "level": "Intermediate"
+      }
     ]
   },
   "links": {
     "items": [
-      { "label": "GitHub", "url": "https://github.com/wtfpac" },
-      { "label": "LinkedIn", "url": "https://www.linkedin.com/in/w7ll/" }
+      {
+        "label": "GitHub",
+        "url": "https://github.com/wtfpac"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/w7ll/"
+      }
     ]
   }
 }

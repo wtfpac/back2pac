@@ -36,6 +36,17 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+/* respeita os fodid que desativou animacoes no sistema operacional */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   margin: 0;
   background: var(--bg);
@@ -48,11 +59,22 @@ body {
   word-break: break-word;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-size: 0.875rem;
   line-height: 1.2;
 }
@@ -535,4 +557,33 @@ a.tag:hover {
   .skill-category {
     min-width: auto;
   }
+}
+
+/* caixa do nome na home */
+.name-box {
+  border: 1px solid var(--border);
+  padding: 3rem 1rem;
+  margin: 2rem 0 3rem;
+  text-align: center;
+}
+
+.name-box-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.name-box-sub {
+  color: var(--fg-muted);
+  margin-top: 0.4rem;
+}
+
+/* botao largo, estilo do "ver todos os posts" */
+.button-row {
+  display: block;
+  margin-top: var(--gap);
+  padding: 0 16px;
+  line-height: 36px;
+  text-align: center;
+  border: 1px solid var(--border);
+  text-decoration: none;
 }
