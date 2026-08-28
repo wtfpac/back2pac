@@ -3,14 +3,15 @@ import { slugify } from '@/lib/slug';
 
 const LOCALES = { pt: 'pt-BR', en: 'en-US' };
 
-// Usado na listagem e na página do post; showWordCount separa os dois casos
-export default function PostMeta({ post, lang, dict, showWordCount = false }) {
+// usado na listagem e na pagina do post; showWordCount separa os dois casos.
+// children entra no fim da mesma linha de metadados
+export default function PostMeta({ post, lang, dict, showWordCount = false, children }) {
   const date = post.date
     ? new Date(post.date).toLocaleDateString(LOCALES[lang] ?? LOCALES.pt, {
         day: '2-digit',
         month: '2-digit',
         year: 'numeric',
-        // Sem UTC a data pode voltar um dia dependendo do fuso do visitante
+        // sem utc a data pode voltar um dia dependendo do fuso do visitante
         timeZone: 'UTC',
       })
     : null;
@@ -32,6 +33,8 @@ export default function PostMeta({ post, lang, dict, showWordCount = false }) {
           {category}
         </Link>
       ))}
+
+      {children}
     </div>
   );
 }

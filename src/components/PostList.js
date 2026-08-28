@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import PostMeta from './PostMeta';
+import StatsBadge from './StatsBadge';
 
-// emptyMessage permite a busca dizer "nada encontrado' em vez de "nada publicado"
+// emptyMessage permite a busca dizer "nada encontrado" em vez de "nada publicado"
 export default function PostList({ lang, dict, posts, emptyMessage }) {
   if (posts.length === 0) {
     return <p className="empty-state">{emptyMessage ?? dict.content.empty}</p>;
@@ -15,7 +16,9 @@ export default function PostList({ lang, dict, posts, emptyMessage }) {
             <span>{post.title}</span>
           </Link>
           {post.summary && <p className="entry-summary">{post.summary}</p>}
-          <PostMeta post={post} lang={lang} dict={dict} />
+          <PostMeta post={post} lang={lang} dict={dict}>
+            <StatsBadge slug={post.slug} />
+          </PostMeta>
         </li>
       ))}
     </ul>
