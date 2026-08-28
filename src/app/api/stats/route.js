@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server';
-import { getRedis, getRatelimit, getIp, viewsKey, likesKey, voterKey } from '@/lib/redis';
+import {
+  getRedis, getRatelimit, getIp, getVisitorId,
+  viewsKey, likesKey, voterKey,
+} from '@/lib/redis';
 import { getSlugs } from '@/lib/content';
 
 // so leitura: a lista mostra numeros, nao registra nada
 export async function GET(request) {
-  const ip = getIp(request);
-
-  const { success } = await getRatelimit().limit(ip);
+  const { success } = await getRatelimit().limit(getIp(request));
   if (!success) {
     return NextResponse.json({ error: 'muitas requisicoes' }, { status: 429 });
   }
@@ -14,12 +15,12 @@ export async function GET(request) {
   const slugs = [...new Set(['pt', 'en'].flatMap((lang) => getSlugs(lang)))];
   if (slugs.length === 0) return NextResponse.json({});
 
-  // uma unica ida ao banco: views, likes e a marca deste ip, nessa ordem
-  const keys = [
-    ...slugs.map(viewsKey),
-    ...slugs.map(likesKey),
-    ...slugs.map((slug) => voterKey(slug, ip)),
-  ];
+  const visitorId = getVisitorId(request);
+
+  // uma unica ida ao banco: views, likes e, se houver id, as marcas
+  const keys = [...slugs.map(viewsKey), ...slugs.map(likesKey)];
+  if (visitorId) keys.push(...slugs.map((slug) => voterKey(slug, visitorId)));
+
   const values = await getRedis().mget(...keys);
 
   const stats = {};
@@ -27,7 +28,7 @@ export async function GET(request) {
     stats[slug] = {
       views: Number(values[index] ?? 0),
       likes: Number(values[index + slugs.length] ?? 0),
-      liked: Boolean(values[index + slugs.length * 2]),
+      liked: visitorId ? Boolean(values[index + slugs.length * 2]) : false,
     };
   });
 

@@ -40,9 +40,22 @@ export function getIp(request) {
   return forwarded?.split(',')[0].trim() ?? 'desconhecido';
 }
 
+// id gerado pelo navegador do visitante. valida o formato para ninguem
+// mandar texto gigante e criar chave enorme no banco
+const VISITOR_PATTERN = /^[a-f0-9-]{36}$/;
+
+export function getVisitorId(request) {
+  const id = request.headers.get('x-visitor-id');
+  return id && VISITOR_PATTERN.test(id) ? id : null;
+}
+
 // chaves sem idioma: o mesmo post em pt e en compartilha os numeros
 export const viewsKey = (slug) => `views:${slug}`;
 export const likesKey = (slug) => `likes:${slug}`;
 
-// marca de quem ja curtiu, para recusar repeticao
-export const voterKey = (slug, ip) => `liked:${slug}:${ip}`;
+// quem curtiu: por navegador, para rede compartilhada nao misturar
+export const voterKey = (slug, visitorId) => `liked:${slug}:${visitorId}`;
+
+// teto diario por ip: freia quem limpa o navegador em laco,
+// sem impedir varias pessoas da mesma rede
+export const ipQuotaKey = (slug, ip) => `quota:${slug}:${ip}`;

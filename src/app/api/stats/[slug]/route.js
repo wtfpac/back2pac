@@ -1,6 +1,15 @@
 import { NextResponse } from 'next/server';
-import { getRedis, getRatelimit, getIp, viewsKey, likesKey, voterKey } from '@/lib/redis';
+import {
+  getRedis, getRatelimit, getIp, getVisitorId,
+  viewsKey, likesKey, voterKey, ipQuotaKey,
+} from '@/lib/redis';
 import { getSlugs } from '@/lib/content';
+
+const ONE_DAY = 60 * 60 * 24;
+
+// quantas curtidas um mesmo ip pode iniciar por post por dia.
+// alto o bastante para uma sala de aula inteira
+const IP_DAILY_CAP = 20;
 
 // sem isso, qualquer um poderia criar chaves inventadas e encher o banco
 function isKnownSlug(slug) {
@@ -22,12 +31,13 @@ export async function GET(request, { params }) {
     return NextResponse.json({ error: 'muitas requisicoes' }, { status: 429 });
   }
 
-  // mget busca as tres chaves numa unica ida ao banco
-  const [views, likes, voted] = await getRedis().mget(
-    viewsKey(slug),
-    likesKey(slug),
-    voterKey(slug, getIp(request))
-  );
+  const visitorId = getVisitorId(request);
+  const keys = [viewsKey(slug), likesKey(slug)];
+
+  // sem id nao da para saber se este visitante curtiu
+  if (visitorId) keys.push(voterKey(slug, visitorId));
+
+  const [views, likes, voted] = await getRedis().mget(...keys);
 
   return NextResponse.json({
     views: Number(views ?? 0),
@@ -56,15 +66,19 @@ export async function POST(request, { params }) {
   }
 
   if (action === 'like') {
-    const key = voterKey(slug, getIp(request));
+    const visitorId = getVisitorId(request);
+    if (!visitorId) {
+      return NextResponse.json({ error: 'identificador ausente' }, { status: 400 });
+    }
 
-    // a marca do ip nao expira mais: ela e o que diz se voce
-    // curtiu ou nao, e precisa valer enquanto a curtida valer
+    const key = voterKey(slug, visitorId);
+
+    // ja curtiu: este clique desfaz. nao devolve vaga da cota do ip,
+    // senao curtir e descurtir em laco burlaria o teto
     if (await redis.get(key)) {
       await redis.del(key);
       const likes = await redis.decr(likesKey(slug));
 
-      // protege contra negativo se as chaves saírem de sincronia
       if (likes < 0) {
         await redis.set(likesKey(slug), 0);
         return NextResponse.json({ likes: 0, liked: false });
@@ -73,6 +87,22 @@ export async function POST(request, { params }) {
       return NextResponse.json({ likes, liked: false });
     }
 
+    // consome uma vaga do teto diario do ip
+    const quota = ipQuotaKey(slug, getIp(request));
+    const used = await redis.incr(quota);
+    if (used === 1) await redis.expire(quota, ONE_DAY);
+
+    if (used > IP_DAILY_CAP) {
+      await redis.decr(quota);
+      const likes = await redis.get(likesKey(slug));
+
+      return NextResponse.json(
+        { likes: Number(likes ?? 0), liked: false, limited: true },
+        { status: 429 }
+      );
+    }
+
+    // a marca do navegador nao expira: ela e o que diz se voce curtiu
     await redis.set(key, 1);
     const likes = await redis.incr(likesKey(slug));
 

@@ -8,9 +8,23 @@ import { useEffect, useState } from 'react';
 let statsPromise;
 let statsCache;
 
+// id anonimo deste navegador, criado na primeira visita
+function getVisitorId() {
+  let id = localStorage.getItem('visitorId');
+
+  if (!id) {
+    id = crypto.randomUUID();
+    localStorage.setItem('visitorId', id);
+  }
+
+  return id;
+}
+
 function loadStats() {
   if (!statsPromise) {
-    statsPromise = fetch('/api/stats')
+    statsPromise = fetch('/api/stats', {
+      headers: { 'x-visitor-id': getVisitorId() },
+    })
       .then((res) => res.json())
       .then((data) => {
         statsCache = data;
@@ -49,7 +63,10 @@ export default function PostStats({ slug, dict, countView = false }) {
       try {
         const res = await fetch(`/api/stats/${slug}`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            'x-visitor-id': getVisitorId(),
+          },
           body: JSON.stringify({ action: 'view' }),
         });
         const data = await res.json();
@@ -77,7 +94,10 @@ export default function PostStats({ slug, dict, countView = false }) {
     try {
       const res = await fetch(`/api/stats/${slug}`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-visitor-id': getVisitorId(),
+        },
         body: JSON.stringify({ action: 'like' }),
       });
       const data = await res.json();
