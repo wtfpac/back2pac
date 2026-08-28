@@ -1,9 +1,14 @@
 import { NextResponse } from 'next/server';
-import { getRedis, viewsKey, likesKey } from '@/lib/redis';
+import { getRedis, getRatelimit, getIp, viewsKey, likesKey } from '@/lib/redis';
 import { getSlugs } from '@/lib/content';
 
 // so leitura: a lista mostra numeros, nao registra nada
-export async function GET() {
+export async function GET(request) {
+  const { success } = await getRatelimit().limit(getIp(request));
+  if (!success) {
+    return NextResponse.json({ error: 'muitas requisicoes' }, { status: 429 });
+  }
+
   const slugs = [...new Set(['pt', 'en'].flatMap((lang) => getSlugs(lang)))];
   if (slugs.length === 0) return NextResponse.json({});
 

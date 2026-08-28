@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getRedis, viewsKey, likesKey, voterKey } from '@/lib/redis';
+import { getRedis, getRatelimit, getIp, viewsKey, likesKey, voterKey } from '@/lib/redis';
 import { getSlugs } from '@/lib/content';
 
 const ONE_DAY = 60 * 60 * 24;
@@ -9,16 +9,19 @@ function isKnownSlug(slug) {
   return ['pt', 'en'].some((lang) => getSlugs(lang).includes(slug));
 }
 
-function getIp(request) {
-  // atras da vercel o ip real vem no x-forwarded-for, primeiro da lista
-  const forwarded = request.headers.get('x-forwarded-for');
-  return forwarded?.split(',')[0].trim() ?? 'desconhecido';
+async function checkLimit(request) {
+  const { success } = await getRatelimit().limit(getIp(request));
+  return success;
 }
 
 export async function GET(request, { params }) {
   const { slug } = await params;
   if (!isKnownSlug(slug)) {
     return NextResponse.json({ error: 'post inexistente' }, { status: 404 });
+  }
+
+  if (!(await checkLimit(request))) {
+    return NextResponse.json({ error: 'muitas requisicoes' }, { status: 429 });
   }
 
   // mget busca as duas chaves numa unica ida ao banco
@@ -34,6 +37,10 @@ export async function POST(request, { params }) {
   const { slug } = await params;
   if (!isKnownSlug(slug)) {
     return NextResponse.json({ error: 'post inexistente' }, { status: 404 });
+  }
+
+  if (!(await checkLimit(request))) {
+    return NextResponse.json({ error: 'muitas requisicoes' }, { status: 429 });
   }
 
   const { action } = await request.json().catch(() => ({}));
