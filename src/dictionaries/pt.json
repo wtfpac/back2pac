@@ -35,7 +35,9 @@
     "readingTime": "min de leitura",
     "words": "palavras",
     "searchPlaceholder": "Digite para buscar...",
-    "noResults": "Nenhum resultado encontrado."
+    "noResults": "Nenhum resultado encontrado.",
+    "lastDeploy": "Último deploy em",
+    "backToTop": "Voltar ao topo"
   },
   "about": {
     "text": "Trabalho com infraestrutura de TI e desenvolvimento web. No dia a dia lido com virtualização, monitoramento e automação em ambiente corporativo, e nos projetos pessoais construo aplicações com Next.js, React e TypeScript. Formado em Análise e Desenvolvimento de Sistemas e cursando Engenharia de Software na Uniamérica, com certificações Red Hat em administração de sistemas Linux."
