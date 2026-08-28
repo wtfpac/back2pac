@@ -2,8 +2,6 @@ import { NextResponse } from 'next/server';
 import { getRedis, getRatelimit, getIp, viewsKey, likesKey, voterKey } from '@/lib/redis';
 import { getSlugs } from '@/lib/content';
 
-const ONE_DAY = 60 * 60 * 24;
-
 // sem isso, qualquer um poderia criar chaves inventadas e encher o banco
 function isKnownSlug(slug) {
   return ['pt', 'en'].some((lang) => getSlugs(lang).includes(slug));
@@ -24,12 +22,17 @@ export async function GET(request, { params }) {
     return NextResponse.json({ error: 'muitas requisicoes' }, { status: 429 });
   }
 
-  // mget busca as duas chaves numa unica ida ao banco
-  const [views, likes] = await getRedis().mget(viewsKey(slug), likesKey(slug));
+  // mget busca as tres chaves numa unica ida ao banco
+  const [views, likes, voted] = await getRedis().mget(
+    viewsKey(slug),
+    likesKey(slug),
+    voterKey(slug, getIp(request))
+  );
 
   return NextResponse.json({
     views: Number(views ?? 0),
     likes: Number(likes ?? 0),
+    liked: Boolean(voted),
   });
 }
 
@@ -53,19 +56,27 @@ export async function POST(request, { params }) {
   }
 
   if (action === 'like') {
-    const ip = getIp(request);
+    const key = voterKey(slug, getIp(request));
 
-    // set com nx grava so se a chave nao existe; se existir,
-    // este ip ja curtiu dentro das ultimas 24h
-    const first = await redis.set(voterKey(slug, ip), 1, { nx: true, ex: ONE_DAY });
+    // a marca do ip nao expira mais: ela e o que diz se voce
+    // curtiu ou nao, e precisa valer enquanto a curtida valer
+    if (await redis.get(key)) {
+      await redis.del(key);
+      const likes = await redis.decr(likesKey(slug));
 
-    if (!first) {
-      const likes = await redis.get(likesKey(slug));
-      return NextResponse.json({ likes: Number(likes ?? 0), alreadyLiked: true });
+      // protege contra negativo se as chaves saírem de sincronia
+      if (likes < 0) {
+        await redis.set(likesKey(slug), 0);
+        return NextResponse.json({ likes: 0, liked: false });
+      }
+
+      return NextResponse.json({ likes, liked: false });
     }
 
+    await redis.set(key, 1);
     const likes = await redis.incr(likesKey(slug));
-    return NextResponse.json({ likes });
+
+    return NextResponse.json({ likes, liked: true });
   }
 
   return NextResponse.json({ error: 'acao invalida' }, { status: 400 });

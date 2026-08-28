@@ -45,6 +45,11 @@ export async function generateMetadata({ params }) {
     authors: [{ name: 'Wellington Alves Clemente', url: siteUrl }],
     creator: 'Wellington Alves Clemente',
 
+    // faz navegador e leitor de feed acharem o rss sozinhos
+    alternates: {
+      types: { 'application/rss+xml': `${siteUrl}/${lang}/rss.xml` },
+    },
+
     openGraph: {
       type: 'website',
       locale: lang === 'pt' ? 'pt_BR' : 'en_US',
@@ -63,7 +68,7 @@ export default async function RootLayout({ children, params }) {
   const buildTime = formatBuildTime(lang);
 
   return (
-    // sem data-theme aqui o atributo e escrito so pelo ThemeToggle
+    // sem data-theme aqui: o atributo e escrito so pelo ThemeToggle.
     // se ficasse no jsx, o react o reverteria a cada navegacao
     <html lang={lang} suppressHydrationWarning>
       <body>
@@ -84,6 +89,9 @@ export default async function RootLayout({ children, params }) {
               <a href={dict.contact.linkedin} target="_blank" rel="noopener noreferrer">
                 LinkedIn
               </a>
+            </li>
+            <li>
+              <a href={`/${lang}/rss.xml`}>RSS</a>
             </li>
           </ul>
 

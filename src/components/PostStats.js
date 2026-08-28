@@ -28,7 +28,6 @@ function patchCache(slug, changes) {
 
 export default function PostStats({ slug, dict, countView = false }) {
   const [stats, setStats] = useState(null);
-  const [liked, setLiked] = useState(false);
   const [sending, setSending] = useState(false);
 
   useEffect(() => {
@@ -38,7 +37,7 @@ export default function PostStats({ slug, dict, countView = false }) {
     async function start() {
       const all = await loadStats();
       if (cancelled) return;
-      setStats(all[slug] ?? { views: 0, likes: 0 });
+      setStats(all[slug] ?? { views: 0, likes: 0, liked: false });
 
       if (!countView) return;
 
@@ -63,7 +62,6 @@ export default function PostStats({ slug, dict, countView = false }) {
       }
     }
 
-    setLiked(Boolean(localStorage.getItem(`liked:${slug}`)));
     start();
 
     return () => {
@@ -71,8 +69,9 @@ export default function PostStats({ slug, dict, countView = false }) {
     };
   }, [slug, countView]);
 
-  async function like() {
-    if (liked || sending) return;
+  // o mesmo botao curte e descurte; quem decide e o servidor
+  async function toggleLike() {
+    if (sending) return;
     setSending(true);
 
     try {
@@ -83,12 +82,10 @@ export default function PostStats({ slug, dict, countView = false }) {
       });
       const data = await res.json();
 
-      localStorage.setItem(`liked:${slug}`, '1');
-      setLiked(true);
-      patchCache(slug, { likes: data.likes });
-      setStats((current) => ({ ...current, likes: data.likes }));
+      patchCache(slug, { likes: data.likes, liked: data.liked });
+      setStats((current) => ({ ...current, likes: data.likes, liked: data.liked }));
     } catch {
-      // se falhou, o botao volta a ficar clicavel
+      // se falhou, o botao continua clicavel
     } finally {
       setSending(false);
     }
@@ -116,14 +113,14 @@ export default function PostStats({ slug, dict, countView = false }) {
       <button
         type="button"
         className="post-stat like-button"
-        data-liked={liked}
-        onClick={like}
-        disabled={liked || sending}
-        aria-label={dict.content.likes}
+        data-liked={stats.liked}
+        onClick={toggleLike}
+        disabled={sending}
+        aria-label={stats.liked ? dict.content.unlike : dict.content.likes}
       >
         <svg
           width="14" height="14" viewBox="0 0 24 24"
-          fill={liked ? 'currentColor' : 'none'}
+          fill={stats.liked ? 'currentColor' : 'none'}
           stroke="currentColor" strokeWidth="1.6"
           strokeLinecap="round" strokeLinejoin="round"
           aria-hidden="true"

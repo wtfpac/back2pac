@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Back 2 Pac
 
-## Getting Started
+Site e blog pessoal. Bilíngue (pt-BR / en-US), tema claro e
+escuro, blog em Markdown, contadores de visualização e curtida.
 
-First, run the development server:
+**Produção:** https://back2pac.vercel.app
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Stack
+
+| Camada | Ferramenta |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Interface | React 19, CSS com variáveis |
+| Fonte | Commit Mono (`@fontsource/commit-mono`) |
+| Conteúdo | Markdown (`gray-matter`, `remark`) |
+| CMS | Decap CMS em `/admin` |
+| Contadores | Upstash Redis |
+| Hospedagem | Vercel |
+
+## Estrutura
+
+```
+content/
+├── posts/pt/          um .md por post
+├── posts/en/          mesmo nome de arquivo, traduzido
+└── settings.json      siteUrl, flags de recurso
+
+public/admin/          painel do Decap CMS
+
+src/
+├── app/[lang]/        páginas, uma versão por idioma
+├── app/api/           auth do painel, contadores
+├── app/globals.css    estilos e paleta
+├── components/
+├── dictionaries/      pt.json e en.json (todo o texto do site)
+├── lib/               content (fs), redis, slug
+└── proxy.js           redireciona / para /pt ou /en
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Regras: nenhum texto no JSX (vai nos dicionários, com chaves idênticas nos dois
+idiomas); `lib/content.js` importa `fs` e é exclusivo do servidor, `lib/slug.js`
+é puro e pode ser importado no cliente.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Comandos
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # roda o mesmo que a Vercel
+npm run lint
+```
 
-## Learn More
+## Variáveis de ambiente
 
-To learn more about Next.js, take a look at the following resources:
+| Variável | Uso |
+|---|---|
+| `GITHUB_CLIENT_ID` | OAuth do painel |
+| `GITHUB_CLIENT_SECRET` | OAuth do painel |
+| `KV_REST_API_URL` | Upstash Redis |
+| `KV_REST_API_TOKEN` | Upstash Redis |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Injetadas pelas integrações na Vercel. Localmente:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npx vercel link
+npx vercel env pull
+```
 
-## Deploy on Vercel
+`BUILD_TIME` é gerado pelo `next.config.mjs` no build.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Novo post
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Pelo painel em `/admin`, ou criando os arquivos à mão em `content/posts/pt/` e
+`content/posts/en/` com o mesmo nome — ele vira a URL e liga as duas versões.
+
+```markdown
+---
+title: "Título"
+date: "2026-08-28"
+summary: "Uma linha, aparece na listagem."
+categories: ["Infraestrutura"]
+---
+
+Conteúdo em Markdown.
+```
+
+Categorias não são cadastradas: existem porque aparecem em algum post.
+
+## Currículo
+
+O conteúdo de `/about` vem de `src/dictionaries/pt.json` e `en.json`.
+
+## Deploy
+
+Push em `main` publica. Outras branches ganham URL de pré-visualização.
+Rode `npm run build` antes de commitar.

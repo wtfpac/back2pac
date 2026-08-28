@@ -110,11 +110,11 @@ a:focus-visible {
 /* altura vem do padding, nao de line-height: fundo de link acompanha
    a altura da linha e viraria um bloco alto demais */
 .header-inner {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: var(--gap);
-  padding: 18px var(--gap);
+  padding: 18px calc(var(--gap) + 12px);
 }
 
 .main-nav ul {
@@ -131,10 +131,10 @@ a:focus-visible {
 }
 
 .header-actions {
-  margin-left: auto;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  justify-self: end;
 }
 
 /* botao de tema */
@@ -147,6 +147,7 @@ a:focus-visible {
   color: var(--tint);
   cursor: pointer;
   line-height: 0;
+  justify-self: start;
 }
 
 .theme-toggle:hover {
@@ -559,6 +560,18 @@ a.tag:hover {
   .skill-row {
     grid-template-columns: 1fr;
   }
+
+  .header-inner {
+    grid-template-columns: 1fr auto;
+    row-gap: 0.6rem;
+  }
+
+  /* menu desce para a segunda linha, ocupando a largura toda */
+  .main-nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    justify-self: center;
+  }
 }
 
 /* caixa do nome na home */
@@ -666,8 +679,7 @@ a.tag:hover {
   color: var(--tint);
 }
 
-/* ja curtiu: coracao preenchido e botao inerte */
+/* ja curtiu: coracao preenchido, mas continua clicavel para desfazer */
 .like-button[data-liked="true"] {
   color: var(--tint);
-  cursor: default;
 }
