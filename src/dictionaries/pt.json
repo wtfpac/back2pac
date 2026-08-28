@@ -86,220 +86,68 @@
     "items": [
       {
         "name": "XFIGHTCLUB",
-        "summary": "Aplicação web de convites com códigos únicos, distribuição automatizada e deploy próprio em nuvem.",
-        "tech": [
-          "Next.js",
-          "TypeScript",
-          "PostgreSQL",
-          "Prisma",
-          "Docker",
-          "AWS"
-        ]
+        "summary": "Convite digital temático de página única, com código de acesso por convidado e validade programada.",
+        "bullets": [
+          "Cada convidado recebe um código único; passada a data de validade, a página muda de comportamento em vez de simplesmente expirar",
+          "Front-end e back-end em repositórios separados, com deploy independente",
+          "Publicado na AWS com Docker, Amazon ECR e EC2, banco PostgreSQL em container e CI/CD por GitHub Actions",
+          "Atuação como Product Owner: definição de escopo, gestão de backlog e acompanhamento em quadro Kanban"
+        ],
+        "tech": ["Next.js", "React", "TypeScript", "Tailwind", "PostgreSQL", "Prisma", "Docker", "AWS", "GitHub Actions"]
       },
       {
         "name": "Triggered",
-        "summary": "Jogo autoral em desenvolvimento, migrando de Godot para Unity.",
-        "tech": [
-          "Godot",
-          "Unity"
-        ]
+        "summary": "Jogo em desenvolvimento construído em torno do algoritmo de geração procedural do meu TCC.",
+        "bullets": [
+          "O algoritmo de geração procedural desenvolvido no meu TCC é a base da criação de mapas do jogo",
+          "Protótipo iniciado em Godot e migrado para Unity, onde o desenvolvimento segue em C#"
+        ],
+        "tech": ["Unity", "C#", "Godot"]
       }
     ]
   },
   "skills": {
     "groups": [
-      {
-        "category": "Infraestrutura",
-        "items": [
-          "Proxmox VE",
-          "Windows Server",
-          "Active Directory",
-          "Linux"
-        ]
-      },
-      {
-        "category": "Monitoramento",
-        "items": [
-          "Zabbix",
-          "Grafana"
-        ]
-      },
-      {
-        "category": "Redes",
-        "items": [
-          "pfSense",
-          "DHCP",
-          "VoIP"
-        ]
-      },
-      {
-        "category": "Microsoft 365",
-        "items": [
-          "Entra ID",
-          "SharePoint",
-          "Exchange"
-        ]
-      },
-      {
-        "category": "Cloud & DevOps",
-        "items": [
-          "AWS",
-          "Vercel",
-          "Docker",
-          "Nginx",
-          "GitHub Actions"
-        ]
-      },
-      {
-        "category": "Back-end",
-        "items": [
-          "Node.js",
-          "Java",
-          "Spring Boot",
-          "Python",
-          "C",
-          "C++"
-        ]
-      },
-      {
-        "category": "Front-end",
-        "items": [
-          "React",
-          "Next.js",
-          "Angular",
-          "TypeScript",
-          "JavaScript",
-          "HTML",
-          "CSS",
-          "Tailwind"
-        ]
-      },
-      {
-        "category": "Banco de Dados",
-        "items": [
-          "PostgreSQL",
-          "MySQL",
-          "MongoDB",
-          "Prisma",
-          "Hibernate"
-        ]
-      },
-      {
-        "category": "Segurança",
-        "items": [
-          "OAuth",
-          "Keycloak",
-          "JWT",
-          "HTTPS/TLS"
-        ]
-      },
-      {
-        "category": "Ágil",
-        "items": [
-          "Scrum",
-          "Kanban"
-        ]
-      },
-      {
-        "category": "Ferramentas",
-        "items": [
-          "Git",
-          "PowerShell",
-          "Postman",
-          "Jira",
-          "Trello",
-          "Figma",
-          "Godot",
-          "Unity"
-        ]
-      }
+      { "category": "Infraestrutura", "items": ["Proxmox VE", "Windows Server", "Active Directory", "Entra ID", "Linux", "Nginx"] },
+      { "category": "Monitoramento e Redes", "items": ["Zabbix", "Grafana", "pfSense", "VoIP"] },
+      { "category": "Cloud e DevOps", "items": ["AWS", "Vercel", "Docker", "GitHub Actions"] },
+      { "category": "Back-end", "items": ["Node.js", "Java", "Spring Boot", "Python", "C", "C++"] },
+      { "category": "Front-end", "items": ["React", "Next.js", "Angular", "TypeScript", "JavaScript", "HTML", "CSS", "Tailwind", "GSAP"] },
+      { "category": "Banco de Dados", "items": ["PostgreSQL", "MySQL", "MongoDB", "Prisma", "Hibernate"] },
+      { "category": "Segurança", "items": ["OAuth", "Keycloak", "JWT", "HTTPS/TLS"] },
+      { "category": "Jogos", "items": ["Unity", "C#", "Godot"] },
+      { "category": "Ferramentas e Processos", "items": ["Git", "PowerShell", "Postman", "Jira", "Trello", "Figma", "Scrum", "Kanban"] }
     ]
   },
   "certifications": {
     "items": [
-      {
-        "name": "Red Hat System Administration II (RH134)",
-        "issuer": "Red Hat",
-        "date": "08/2026"
-      },
-      {
-        "name": "Red Hat System Administration I (RH124)",
-        "issuer": "Red Hat",
-        "date": "08/2026"
-      },
-      {
-        "name": "Mendix Rapid Developer Certification",
-        "issuer": "Mendix",
-        "date": "03/2026"
-      },
-      {
-        "name": "HTML5: Fundamentos para Páginas Web Modernas",
-        "issuer": "IFRS",
-        "date": "01/2026"
-      },
-      {
-        "name": "Administrador de Banco de Dados",
-        "issuer": "IFRS",
-        "date": "08/2025"
-      },
-      {
-        "name": "Windows Server 2016: Active Directory",
-        "issuer": "IFRS",
-        "date": "07/2025"
-      },
-      {
-        "name": "Lógica de Programação",
-        "issuer": "IFRS",
-        "date": "07/2023"
-      }
+      { "name": "Red Hat System Administration II (RH134)", "issuer": "Red Hat", "date": "08/2026" },
+      { "name": "Red Hat System Administration I (RH124)", "issuer": "Red Hat", "date": "08/2026" },
+      { "name": "Mendix Rapid Developer Certification", "issuer": "Mendix", "date": "03/2026" },
+      { "name": "HTML5: Fundamentos para Páginas Web Modernas", "issuer": "IFRS", "date": "01/2026" },
+      { "name": "Administrador de Banco de Dados", "issuer": "IFRS", "date": "08/2025" },
+      { "name": "Windows Server 2016: Active Directory", "issuer": "IFRS", "date": "07/2025" },
+      { "name": "Lógica de Programação", "issuer": "IFRS", "date": "07/2023" }
     ]
   },
   "education": {
     "items": [
-      {
-        "course": "Engenharia de Software",
-        "school": "Uniamérica",
-        "period": "07/2025 – 12/2026",
-        "status": "Cursando"
-      },
-      {
-        "course": "Análise e Desenvolvimento de Sistemas",
-        "school": "Uniamérica",
-        "period": "01/2023 – 06/2025",
-        "status": "Concluído"
-      }
+      { "course": "Engenharia de Software", "school": "Uniamérica", "period": "07/2025 – 12/2026", "status": "Cursando" },
+      { "course": "Análise e Desenvolvimento de Sistemas", "school": "Uniamérica", "period": "01/2023 – 06/2025", "status": "Concluído" }
     ]
   },
   "languages": {
     "items": [
-      {
-        "name": "Português",
-        "level": "Nativo"
-      },
-      {
-        "name": "Inglês",
-        "level": "Avançado"
-      },
-      {
-        "name": "Espanhol",
-        "level": "Fluente"
-      },
-      {
-        "name": "Italiano",
-        "level": "Intermediário"
-      }
+      { "name": "Português", "level": "Nativo · C2" },
+      { "name": "Espanhol", "level": "Fluente · C1" },
+      { "name": "Inglês", "level": "Leitura e escuta avançadas · B2" },
+      { "name": "Italiano", "level": "Básico · A2" }
     ]
   },
   "links": {
     "items": [
-      {
-        "label": "GitHub",
-        "url": "https://github.com/wtfpac"
-      },
-      {
-        "label": "LinkedIn",
-        "url": "https://www.linkedin.com/in/w7ll/"
-      }
+      { "label": "GitHub", "url": "https://github.com/wtfpac" },
+      { "label": "LinkedIn", "url": "https://www.linkedin.com/in/w7ll/" }
     ]
   }
 }

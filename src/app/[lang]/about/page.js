@@ -70,6 +70,11 @@ export default async function AboutPage({ params }) {
               <span>{project.name}</span>
             </div>
             <p className="entry-note">{project.summary}</p>
+            <ul>
+              {project.bullets.map((bullet) => (
+                <li key={bullet}>{bullet}</li>
+              ))}
+            </ul>
             <div className="tag-list">
               {project.tech.map((item) => (
                 <span key={item} className="tag">{item}</span>

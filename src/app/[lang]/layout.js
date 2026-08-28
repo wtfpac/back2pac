@@ -42,6 +42,9 @@ export async function generateMetadata({ params }) {
     title: dict.meta.title,
     description: dict.meta.description,
 
+    authors: [{ name: 'Wellington Alves Clemente', url: siteUrl }],
+    creator: 'Wellington Alves Clemente',
+
     openGraph: {
       type: 'website',
       locale: lang === 'pt' ? 'pt_BR' : 'en_US',

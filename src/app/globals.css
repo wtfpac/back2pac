@@ -629,3 +629,9 @@ a.tag:hover {
   color: var(--link-hover-fg);
   background: var(--link-hover-bg);
 }
+
+.entry ul {
+  margin: 0.4rem 0 0;
+  padding-inline-start: 20px;
+  color: var(--fg-muted);
+}

@@ -86,220 +86,68 @@
     "items": [
       {
         "name": "XFIGHTCLUB",
-        "summary": "Web invitation app with unique codes, automated distribution and self-managed cloud deployment.",
-        "tech": [
-          "Next.js",
-          "TypeScript",
-          "PostgreSQL",
-          "Prisma",
-          "Docker",
-          "AWS"
-        ]
+        "summary": "Themed single-page digital invitation with per-guest access codes and a scheduled expiry.",
+        "bullets": [
+          "Each guest gets a unique code; once the expiry date passes, the page changes behaviour rather than simply going dead",
+          "Front-end and back-end in separate repositories, deployed independently",
+          "Deployed to AWS with Docker, Amazon ECR and EC2, a containerized PostgreSQL database and CI/CD through GitHub Actions",
+          "Acted as Product Owner: scope definition, backlog management and delivery tracking on a Kanban board"
+        ],
+        "tech": ["Next.js", "React", "TypeScript", "Tailwind", "PostgreSQL", "Prisma", "Docker", "AWS", "GitHub Actions"]
       },
       {
         "name": "Triggered",
-        "summary": "Original game in development, currently being migrated from Godot to Unity.",
-        "tech": [
-          "Godot",
-          "Unity"
-        ]
+        "summary": "Game in development built around the procedural generation algorithm from my final thesis.",
+        "bullets": [
+          "The procedural generation algorithm I developed for my thesis drives the game's map creation",
+          "Prototyped in Godot and migrated to Unity, where development continues in C#"
+        ],
+        "tech": ["Unity", "C#", "Godot"]
       }
     ]
   },
   "skills": {
     "groups": [
-      {
-        "category": "Infrastructure",
-        "items": [
-          "Proxmox VE",
-          "Windows Server",
-          "Active Directory",
-          "Linux"
-        ]
-      },
-      {
-        "category": "Monitoring",
-        "items": [
-          "Zabbix",
-          "Grafana"
-        ]
-      },
-      {
-        "category": "Networking",
-        "items": [
-          "pfSense",
-          "DHCP",
-          "VoIP"
-        ]
-      },
-      {
-        "category": "Microsoft 365",
-        "items": [
-          "Entra ID",
-          "SharePoint",
-          "Exchange"
-        ]
-      },
-      {
-        "category": "Cloud & DevOps",
-        "items": [
-          "AWS",
-          "Vercel",
-          "Docker",
-          "Nginx",
-          "GitHub Actions"
-        ]
-      },
-      {
-        "category": "Back-end",
-        "items": [
-          "Node.js",
-          "Java",
-          "Spring Boot",
-          "Python",
-          "C",
-          "C++"
-        ]
-      },
-      {
-        "category": "Front-end",
-        "items": [
-          "React",
-          "Next.js",
-          "Angular",
-          "TypeScript",
-          "JavaScript",
-          "HTML",
-          "CSS",
-          "Tailwind"
-        ]
-      },
-      {
-        "category": "Databases",
-        "items": [
-          "PostgreSQL",
-          "MySQL",
-          "MongoDB",
-          "Prisma",
-          "Hibernate"
-        ]
-      },
-      {
-        "category": "Security",
-        "items": [
-          "OAuth",
-          "Keycloak",
-          "JWT",
-          "HTTPS/TLS"
-        ]
-      },
-      {
-        "category": "Agile",
-        "items": [
-          "Scrum",
-          "Kanban"
-        ]
-      },
-      {
-        "category": "Tools",
-        "items": [
-          "Git",
-          "PowerShell",
-          "Postman",
-          "Jira",
-          "Trello",
-          "Figma",
-          "Godot",
-          "Unity"
-        ]
-      }
+      { "category": "Infrastructure", "items": ["Proxmox VE", "Windows Server", "Active Directory", "Entra ID", "Linux", "Nginx"] },
+      { "category": "Monitoring and Networking", "items": ["Zabbix", "Grafana", "pfSense", "VoIP"] },
+      { "category": "Cloud and DevOps", "items": ["AWS", "Vercel", "Docker", "GitHub Actions"] },
+      { "category": "Back-end", "items": ["Node.js", "Java", "Spring Boot", "Python", "C", "C++"] },
+      { "category": "Front-end", "items": ["React", "Next.js", "Angular", "TypeScript", "JavaScript", "HTML", "CSS", "Tailwind", "GSAP"] },
+      { "category": "Databases", "items": ["PostgreSQL", "MySQL", "MongoDB", "Prisma", "Hibernate"] },
+      { "category": "Security", "items": ["OAuth", "Keycloak", "JWT", "HTTPS/TLS"] },
+      { "category": "Games", "items": ["Unity", "C#", "Godot"] },
+      { "category": "Tools and Processes", "items": ["Git", "PowerShell", "Postman", "Jira", "Trello", "Figma", "Scrum", "Kanban"] }
     ]
   },
   "certifications": {
     "items": [
-      {
-        "name": "Red Hat System Administration II (RH134)",
-        "issuer": "Red Hat",
-        "date": "08/2026"
-      },
-      {
-        "name": "Red Hat System Administration I (RH124)",
-        "issuer": "Red Hat",
-        "date": "08/2026"
-      },
-      {
-        "name": "Mendix Rapid Developer Certification",
-        "issuer": "Mendix",
-        "date": "03/2026"
-      },
-      {
-        "name": "HTML5: Foundations for Modern Web Pages",
-        "issuer": "IFRS",
-        "date": "01/2026"
-      },
-      {
-        "name": "Database Administrator",
-        "issuer": "IFRS",
-        "date": "08/2025"
-      },
-      {
-        "name": "Windows Server 2016: Active Directory",
-        "issuer": "IFRS",
-        "date": "07/2025"
-      },
-      {
-        "name": "Programming Logic",
-        "issuer": "IFRS",
-        "date": "07/2023"
-      }
+      { "name": "Red Hat System Administration II (RH134)", "issuer": "Red Hat", "date": "08/2026" },
+      { "name": "Red Hat System Administration I (RH124)", "issuer": "Red Hat", "date": "08/2026" },
+      { "name": "Mendix Rapid Developer Certification", "issuer": "Mendix", "date": "03/2026" },
+      { "name": "HTML5: Foundations for Modern Web Pages", "issuer": "IFRS", "date": "01/2026" },
+      { "name": "Database Administrator", "issuer": "IFRS", "date": "08/2025" },
+      { "name": "Windows Server 2016: Active Directory", "issuer": "IFRS", "date": "07/2025" },
+      { "name": "Programming Logic", "issuer": "IFRS", "date": "07/2023" }
     ]
   },
   "education": {
     "items": [
-      {
-        "course": "Software Engineering",
-        "school": "Uniamérica",
-        "period": "07/2025 – 12/2026",
-        "status": "In progress"
-      },
-      {
-        "course": "Systems Analysis and Development",
-        "school": "Uniamérica",
-        "period": "01/2023 – 06/2025",
-        "status": "Completed"
-      }
+      { "course": "Software Engineering", "school": "Uniamérica", "period": "07/2025 – 12/2026", "status": "In progress" },
+      { "course": "Systems Analysis and Development", "school": "Uniamérica", "period": "01/2023 – 06/2025", "status": "Completed" }
     ]
   },
   "languages": {
     "items": [
-      {
-        "name": "Portuguese",
-        "level": "Native"
-      },
-      {
-        "name": "English",
-        "level": "Advanced"
-      },
-      {
-        "name": "Spanish",
-        "level": "Fluent"
-      },
-      {
-        "name": "Italian",
-        "level": "Intermediate"
-      }
+      { "name": "Portuguese", "level": "Native · C2" },
+      { "name": "Spanish", "level": "Fluent · C1" },
+      { "name": "English", "level": "Advanced reading and listening · B2" },
+      { "name": "Italian", "level": "Basic · A2" }
     ]
   },
   "links": {
     "items": [
-      {
-        "label": "GitHub",
-        "url": "https://github.com/wtfpac"
-      },
-      {
-        "label": "LinkedIn",
-        "url": "https://www.linkedin.com/in/w7ll/"
-      }
+      { "label": "GitHub", "url": "https://github.com/wtfpac" },
+      { "label": "LinkedIn", "url": "https://www.linkedin.com/in/w7ll/" }
     ]
   }
 }

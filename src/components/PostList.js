@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import PostMeta from './PostMeta';
 
-// emptyMessage manda a busca dizer "nada encontrado"
+// emptyMessage permite a busca dizer "nada encontrado' em vez de "nada publicado"
 export default function PostList({ lang, dict, posts, emptyMessage }) {
   if (posts.length === 0) {
     return <p className="empty-state">{emptyMessage ?? dict.content.empty}</p>;
@@ -14,8 +14,8 @@ export default function PostList({ lang, dict, posts, emptyMessage }) {
           <Link href={`/${lang}/posts/${post.slug}`} className="entry-list-title">
             <span>{post.title}</span>
           </Link>
-          <PostMeta post={post} lang={lang} dict={dict} />
           {post.summary && <p className="entry-summary">{post.summary}</p>}
+          <PostMeta post={post} lang={lang} dict={dict} />
         </li>
       ))}
     </ul>
