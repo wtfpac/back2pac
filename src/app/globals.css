@@ -154,21 +154,32 @@ a:focus-visible {
   filter: brightness(75%);
 }
 
-/* os dois icones ocupam a mesma celula do grid, sobrepostos */
+/* os dois icones ocupam a mesma celula do grid, sobrepostos.
+   quem decide qual aparece e o css, a partir do data-theme no html */
 .theme-icon {
   grid-area: 1 / 1;
   display: flex;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.theme-icon[data-visible="false"] {
+.theme-icon-sun {
   opacity: 0;
   transform: rotate(-90deg) scale(0.5);
 }
 
-.theme-icon[data-visible="true"] {
+.theme-icon-moon {
   opacity: 1;
   transform: rotate(0) scale(1);
+}
+
+[data-theme="light"] .theme-icon-sun {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+
+[data-theme="light"] .theme-icon-moon {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
 }
 
 /* seletor de idioma */
