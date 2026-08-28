@@ -2,7 +2,31 @@
 
 import { useEffect, useState } from 'react';
 
-export default function PostStats({ slug, dict }) {
+// uma requisicao para todos os posts, compartilhada por todos os
+// componentes da tela. statsCache guarda o objeto ja resolvido para
+// que uma curtida se reflita em quem montar depois
+let statsPromise;
+let statsCache;
+
+function loadStats() {
+  if (!statsPromise) {
+    statsPromise = fetch('/api/stats')
+      .then((res) => res.json())
+      .then((data) => {
+        statsCache = data;
+        return data;
+      })
+      .catch(() => ({}));
+  }
+
+  return statsPromise;
+}
+
+function patchCache(slug, changes) {
+  if (statsCache?.[slug]) Object.assign(statsCache[slug], changes);
+}
+
+export default function PostStats({ slug, dict, countView = false }) {
   const [stats, setStats] = useState(null);
   const [liked, setLiked] = useState(false);
   const [sending, setSending] = useState(false);
@@ -11,37 +35,41 @@ export default function PostStats({ slug, dict }) {
     // evita atualizar estado depois que o componente saiu da tela
     let cancelled = false;
 
-    async function load() {
+    async function start() {
+      const all = await loadStats();
+      if (cancelled) return;
+      setStats(all[slug] ?? { views: 0, likes: 0 });
+
+      if (!countView) return;
+
+      // conta a visualizacao uma vez por aba, nao a cada recarga
+      const seenKey = `seen:${slug}`;
+      if (sessionStorage.getItem(seenKey)) return;
+      sessionStorage.setItem(seenKey, '1');
+
       try {
-        const res = await fetch(`/api/stats/${slug}`);
-        const data = await res.json();
-        if (cancelled) return;
-        setStats(data);
-
-        // conta a visualizacao uma vez por aba, nao a cada recarga
-        const seenKey = `seen:${slug}`;
-        if (sessionStorage.getItem(seenKey)) return;
-        sessionStorage.setItem(seenKey, '1');
-
-        const viewRes = await fetch(`/api/stats/${slug}`, {
+        const res = await fetch(`/api/stats/${slug}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ action: 'view' }),
         });
-        const viewData = await viewRes.json();
-        if (!cancelled) setStats((current) => ({ ...current, views: viewData.views }));
+        const data = await res.json();
+        if (cancelled) return;
+
+        patchCache(slug, { views: data.views });
+        setStats((current) => ({ ...current, views: data.views }));
       } catch {
         // contador indisponivel e melhor que pagina quebrada
       }
     }
 
     setLiked(Boolean(localStorage.getItem(`liked:${slug}`)));
-    load();
+    start();
 
     return () => {
       cancelled = true;
     };
-  }, [slug]);
+  }, [slug, countView]);
 
   async function like() {
     if (liked || sending) return;
@@ -57,9 +85,10 @@ export default function PostStats({ slug, dict }) {
 
       localStorage.setItem(`liked:${slug}`, '1');
       setLiked(true);
+      patchCache(slug, { likes: data.likes });
       setStats((current) => ({ ...current, likes: data.likes }));
     } catch {
-      // silencioso: se falhou, o botao volta a ficar clicavel
+      // se falhou, o botao volta a ficar clicavel
     } finally {
       setSending(false);
     }
@@ -70,10 +99,10 @@ export default function PostStats({ slug, dict }) {
   if (!stats) return null;
 
   return (
-    <div className="post-stats">
+    <>
       <span className="post-stat" title={dict.content.views}>
         <svg
-          width="15" height="15" viewBox="0 0 24 24" fill="none"
+          width="14" height="14" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" strokeWidth="1.6"
           strokeLinecap="round" strokeLinejoin="round"
           aria-hidden="true"
@@ -93,7 +122,7 @@ export default function PostStats({ slug, dict }) {
         aria-label={dict.content.likes}
       >
         <svg
-          width="15" height="15" viewBox="0 0 24 24"
+          width="14" height="14" viewBox="0 0 24 24"
           fill={liked ? 'currentColor' : 'none'}
           stroke="currentColor" strokeWidth="1.6"
           strokeLinecap="round" strokeLinejoin="round"
@@ -103,6 +132,6 @@ export default function PostStats({ slug, dict }) {
         </svg>
         {stats.likes}
       </button>
-    </div>
+    </>
   );
 }

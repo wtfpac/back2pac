@@ -31,7 +31,7 @@ export default async function PostPage({ params }) {
     <article className="entry-article">
       <h1 className="page-title">{post.title}</h1>
       <PostMeta post={post} lang={lang} dict={dict} showWordCount />
-      <PostStats slug={slug} dict={dict} />
+      <PostStats slug={slug} dict={dict} countView />
       {/* html vem do seu proprio markdown, nao de entrada externa */}
       <div className="prose" dangerouslySetInnerHTML={{ __html: post.html }} />
     </article>
