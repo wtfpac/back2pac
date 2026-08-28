@@ -37,7 +37,9 @@
     "searchPlaceholder": "Type to search...",
     "noResults": "No results found.",
     "lastDeploy": "Last deployed on",
-    "backToTop": "Back to top"
+    "backToTop": "Back to top",
+    "views": "Views",
+    "likes": "Like"
   },
   "about": {
     "text": "I work with IT infrastructure and web development. Day to day I handle virtualization, monitoring and automation in a corporate environment, and in personal projects I build applications with Next.js, React and TypeScript. I hold a degree in Systems Analysis and Development, am currently studying Software Engineering at Uniamérica, and am Red Hat certified in Linux system administration."
