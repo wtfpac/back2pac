@@ -17,7 +17,7 @@ export default async function Home({ params }) {
   return (
     <main>
       <div className="name-box">
-        <p className="name-box-title">Wellington Alves Clemente</p>
+        <p className="name-box-title">Wellington Alves</p>
         <p className="name-box-sub">{dict.hero.role}</p>
       </div>
 

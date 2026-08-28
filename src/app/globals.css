@@ -48,6 +48,9 @@ html {
 }
 
 body {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
   margin: 0;
   background: var(--bg);
   color: var(--fg);
@@ -191,7 +194,7 @@ a:focus-visible {
   max-width: var(--main-width);
   margin: 0 auto;
   padding: var(--gap);
-  min-height: calc(100dvh - 120px);
+  flex: 1;
 }
 
 .site-footer {
@@ -312,8 +315,8 @@ a:focus-visible {
 
 /* skills */
 .skill-row {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 22ch 1fr;
   gap: 0.5rem;
   align-items: baseline;
   margin-bottom: 0.5rem;
@@ -321,7 +324,6 @@ a:focus-visible {
 
 .skill-category {
   color: var(--fg-muted);
-  min-width: 16ch;
 }
 
 /* tags entre colchetes */
@@ -554,8 +556,8 @@ a.tag:hover {
     --gap: 14px;
   }
 
-  .skill-category {
-    min-width: auto;
+  .skill-row {
+    grid-template-columns: 1fr;
   }
 }
 
