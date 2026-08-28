@@ -1,28 +1,8 @@
-export async function GET(request) {
-  const { origin, searchParams } = new URL(request.url);
-  const code = searchParams.get('code');
+import { NextResponse } from 'next/server';
 
-  // Troca o código temporário pelo token de acesso.
-  // Esta chamada acontece no servidor: o segredo nunca chega ao navegador.
-  const response = await fetch('https://github.com/login/oauth/access_token', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-    body: JSON.stringify({
-      client_id: process.env.GITHUB_CLIENT_ID,
-      client_secret: process.env.GITHUB_CLIENT_SECRET,
-      code,
-    }),
-  });
-
-  const data = await response.json();
-  const ok = Boolean(data.access_token);
-
-  const payload = ok
-    ? { token: data.access_token, provider: 'github' }
-    : { error: data.error_description ?? 'Falha na autenticação' };
-
-  // O Decap espera o token por postMessage, não por redirecionamento:
-  // esta página devolve o resultado para a janela que abriu o popup
+// o decap espera o token por postMessage, nao por redirecionamento:
+// esta pagina devolve o resultado para a janela que abriu o popup
+function popupResponse(origin, ok, payload) {
   const html = `<!doctype html>
 <html><body><script>
   (function () {
@@ -37,7 +17,40 @@ export async function GET(request) {
   })();
 </script></body></html>`;
 
-  return new Response(html, {
+  const response = new NextResponse(html, {
     headers: { 'Content-Type': 'text/html; charset=utf-8' },
   });
+
+  // o state e de uso unico
+  response.cookies.delete('oauth_state');
+  return response;
+}
+
+export async function GET(request) {
+  const { origin, searchParams } = new URL(request.url);
+  const code = searchParams.get('code');
+  const state = searchParams.get('state');
+  const expected = request.cookies.get('oauth_state')?.value;
+
+  if (!state || !expected || state !== expected) {
+    return popupResponse(origin, false, { error: 'state invalido' });
+  }
+
+  // troca o codigo temporario pelo token de acesso.
+  // esta chamada acontece no servidor: o segredo nunca chega ao navegador
+  const res = await fetch('https://github.com/login/oauth/access_token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify({
+      client_id: process.env.GITHUB_CLIENT_ID,
+      client_secret: process.env.GITHUB_CLIENT_SECRET,
+      code,
+    }),
+  });
+
+  const data = await res.json();
+
+  return data.access_token
+    ? popupResponse(origin, true, { token: data.access_token, provider: 'github' })
+    : popupResponse(origin, false, { error: data.error_description ?? 'falha na autenticacao' });
 }
