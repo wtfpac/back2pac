@@ -42,3 +42,7 @@ next-env.d.ts
 
 .vercel
 .env*
+
+# arquivos gerados pelo next dev
+AGENTS.md
+CLAUDE.md
