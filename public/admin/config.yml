@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: wtfpac/pacfolio
+  repo: wtfpac/back2pac
   branch: main
   # aponta para as rotas de autenticacao que criamos
   base_url: https://back2pac.vercel.app
