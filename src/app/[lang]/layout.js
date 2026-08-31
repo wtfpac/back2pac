@@ -45,6 +45,12 @@ export async function generateMetadata({ params }) {
     authors: [{ name: 'Wellington Alves Clemente', url: siteUrl }],
     creator: 'Wellington Alves Clemente',
 
+    // prova pro google que o site e seu. so precisa ficar aqui ate ele
+    // verificar, mas tirar depois faz perder a verificacao
+    verification: {
+      google: 'Jz-UwpKMudeZfvL_48NZLQonaeu4iSv6SZk76yFD75Y',
+    },
+
     // faz navegador e leitor de feed acharem o rss sozinhos
     alternates: {
       types: { 'application/rss+xml': `${siteUrl}/${lang}/rss.xml` },
@@ -58,7 +64,9 @@ export async function generateMetadata({ params }) {
       description: dict.meta.description,
     },
 
-    twitter: { card: 'summary' },
+    // large_image porque a opengraph-image e 1200x630. com 'summary'
+    // o x/twitter corta ela num quadrado pequeno
+    twitter: { card: 'summary_large_image' },
   };
 }
 
@@ -66,6 +74,9 @@ export default async function RootLayout({ children, params }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
   const buildTime = formatBuildTime(lang);
+
+  // calculado no build, junto com o resto da pagina estatica
+  const year = new Date().getFullYear();
 
   return (
     // sem data-theme aqui: o atributo e escrito so pelo ThemeToggle.
@@ -77,7 +88,7 @@ export default async function RootLayout({ children, params }) {
         <div className="container">{children}</div>
 
         <footer className="site-footer">
-          <p>© 2026 Back 2 Pac</p>
+          <p>© {year} Back 2 Pac</p>
 
           <ul className="footer-links">
             <li>
