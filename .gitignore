@@ -30,13 +30,19 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
+# env files (can opt-in for committing if needed)
+.env*
+
+# vercel
+.vercel
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
 
-.vercel
-.env*
+# lint
+.eslintcache
 
-# arquivos gerados pelo next dev
+# gerados pelo next dev
 AGENTS.md
 CLAUDE.md

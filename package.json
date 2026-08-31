@@ -1,12 +1,12 @@
 {
-  "name": "wtfpac",
+  "name": "back2pac",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev -H 127.0.0.1",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint --cache"
   },
   "dependencies": {
     "@fontsource/commit-mono": "^5.3.0",
@@ -21,7 +21,7 @@
     "remark-html": "^16.0.1"
   },
   "devDependencies": {
-    "eslint": "^10",
+    "eslint": "^9",
     "eslint-config-next": "16.3.3"
   },
   "allowScripts": {
