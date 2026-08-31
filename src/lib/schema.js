@@ -2,7 +2,7 @@ import { getSettings } from '@/lib/content';
 
 // nome completo aqui de proposito: nao aparece na tela, mas e por ele que
 // o google liga a pessoa ao site quando alguem pesquisa
-const FULL_NAME = 'Wellington Alves Clemente';
+export const FULL_NAME = 'Wellington Alves Clemente';
 const SHORT_NAME = 'Wellington Alves';
 
 // id fixo para as duas paginas falarem da mesma pessoa. sem isso o google
