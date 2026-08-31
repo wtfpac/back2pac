@@ -9,7 +9,7 @@ export default function Header({ lang, dict }) {
   return (
     <header className="site-header">
       <div className="header-inner">
-        <ThemeToggle />
+        <ThemeToggle label={dict.content.toggleTheme} />
 
         <nav className="main-nav">
           <ul>

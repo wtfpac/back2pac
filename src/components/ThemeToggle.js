@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 // sem estado no react: o tema vive no atributo data-theme do html, e o
 // css decide qual icone mostrar. isso remove o setState dentro do efeito
 // e o piscar do icone ao carregar
-export default function ThemeToggle() {
+export default function ThemeToggle({ label }) {
   useEffect(() => {
     const saved = localStorage.getItem('theme') || 'dark';
     document.documentElement.setAttribute('data-theme', saved);
@@ -24,7 +24,7 @@ export default function ThemeToggle() {
       type="button"
       onClick={toggleTheme}
       className="theme-toggle"
-      aria-label="Alternar tema"
+      aria-label={label}
     >
       <span className="theme-icon theme-icon-moon">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">

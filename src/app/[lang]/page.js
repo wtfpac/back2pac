@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getDictionary } from '@/dictionaries';
 import { getPosts } from '@/lib/content';
+import { websiteSchema } from '@/lib/schema';
 import PostList from '@/components/PostList';
 
 export function generateStaticParams() {
@@ -16,6 +17,12 @@ export default async function Home({ params }) {
 
   return (
     <main>
+      {/* dado para buscador, nao roda nada no navegador */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema(lang, dict)) }}
+      />
+
       <div className="name-box">
         <p className="name-box-title">Wellington Alves</p>
         <p className="name-box-sub">{dict.hero.role}</p>

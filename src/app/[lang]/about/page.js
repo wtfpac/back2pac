@@ -1,4 +1,5 @@
 import { getDictionary } from '@/dictionaries';
+import { personSchema } from '@/lib/schema';
 import Section from '@/components/Section';
 
 export function generateStaticParams() {
@@ -18,6 +19,13 @@ export default async function AboutPage({ params }) {
 
   return (
     <main>
+      {/* o curriculo em formato de maquina. e daqui que o google tira o
+          nome completo, os perfis e a formacao */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema(lang, dict)) }}
+      />
+
       <h1 className="page-title">{dict.nav.about}</h1>
 
       <div className="hero">
@@ -52,7 +60,7 @@ export default async function AboutPage({ params }) {
 
       <Section id="experience" title={dict.sections.experience}>
         {dict.experience.items.map((job) => (
-          // empresa + periodo como chave: dois cargos iguais em empresasdferentes nao colidem
+          // empresa + periodo como chave: dois cargos iguais em empresas diferentes nao colidem
           <article key={`${job.company}-${job.period}`} className="entry">
             <div className="entry-head">
               <span>{job.role} — <span className="entry-org">{job.company}</span></span>
