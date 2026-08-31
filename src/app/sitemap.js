@@ -16,6 +16,11 @@ export default function sitemap() {
 
     for (const lang of LANGUAGES) {
         addPath(paths, '', lang, { changeFrequency: 'monthly', priority: 1 });
+
+        // o curriculo. e a pagina que precisa ranquear pelo seu nome,
+        // entao vem logo depois da home em prioridade
+        addPath(paths, '/about', lang, { changeFrequency: 'monthly', priority: 0.9 });
+
         addPath(paths, '/posts', lang, { changeFrequency: 'weekly', priority: 0.8 });
         addPath(paths, '/categories', lang, { changeFrequency: 'monthly', priority: 0.5 });
 
