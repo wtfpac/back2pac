@@ -9,6 +9,13 @@ import { getSettings } from '@/lib/content';
 
 const LOCALES = { pt: 'pt-BR', en: 'en-US' };
 
+// roda antes do navegador pintar a tela, entao quem escolheu o tema claro
+// nao ve o lampejo escuro. o try existe porque o localStorage estoura em
+// janela anonima com cookies bloqueados
+const THEME_SCRIPT =
+  "try{document.documentElement.setAttribute('data-theme'," +
+  "localStorage.getItem('theme')||'dark')}catch(e){}";
+
 // formata o horario do build no fuso de foz do iguacu, para todo
 // visitante ver a mesma hora independente de onde esteja
 function formatBuildTime(lang) {
@@ -79,9 +86,13 @@ export default async function RootLayout({ children, params }) {
   const year = new Date().getFullYear();
 
   return (
-    // sem data-theme aqui: o atributo e escrito so pelo ThemeToggle.
-    // se ficasse no jsx, o react o reverteria a cada navegacao
+    // suppressHydrationWarning porque o script acima muda o html antes
+    // do react rodar, e sem isso o react reclamaria da diferenca
     <html lang={lang} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
+
       <body>
         <Header lang={lang} dict={dict} />
 

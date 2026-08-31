@@ -1,16 +1,9 @@
 'use client';
 
-import { useEffect } from 'react';
-
-// sem estado no react: o tema vive no atributo data-theme do html, e o
-// css decide qual icone mostrar. isso remove o setState dentro do efeito
-// e o piscar do icone ao carregar
+// sem estado e sem efeito: quem aplica o tema salvo e o script do layout,
+// que roda antes da pagina aparecer. aqui so troca o atributo no clique,
+// e o css decide qual icone mostrar
 export default function ThemeToggle({ label }) {
-  useEffect(() => {
-    const saved = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', saved);
-  }, []);
-
   function toggleTheme() {
     const current = document.documentElement.getAttribute('data-theme') || 'dark';
     const next = current === 'dark' ? 'light' : 'dark';
