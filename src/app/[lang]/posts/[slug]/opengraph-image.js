@@ -1,9 +1,16 @@
 import { ImageResponse } from 'next/og';
-import { getPosts } from '@/lib/content';
+import { getPosts, getSlugs } from '@/lib/content';
 
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 export const alt = 'Post';
+
+// sem isto a imagem e gerada a cada pedido; com isto sai pronta no build
+export function generateStaticParams() {
+  return ['pt', 'en'].flatMap((lang) =>
+    getSlugs(lang).map((slug) => ({ lang, slug }))
+  );
+}
 
 export default async function Image({ params }) {
   const { lang, slug } = await params;

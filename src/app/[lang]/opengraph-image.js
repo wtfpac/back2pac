@@ -5,6 +5,11 @@ export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 export const alt = 'Back 2 Pac';
 
+// sem isto a imagem e gerada a cada pedido; com isto sai pronta no build
+export function generateStaticParams() {
+  return [{ lang: 'pt' }, { lang: 'en' }];
+}
+
 export default async function Image({ params }) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
