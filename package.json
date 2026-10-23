@@ -21,7 +21,7 @@
     "remark-html": "^16.0.1"
   },
   "devDependencies": {
-    "eslint": "^9",
+    "eslint": "^10",
     "eslint-config-next": "16.3.3"
   },
   "allowScripts": {
